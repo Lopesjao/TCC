@@ -1,0 +1,25 @@
+*{
+    text-align: center;
+}
+
+#containerform{
+    max-width: 600px; /* Define a largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário na tela */
+    padding: 20px; /
+}
+
+
+
+body {
+    margin:5;
+    padding:5;
+   
+    text-align:center;    
+}
+table{
+    width: 100%;
+}
+
+td{
+    padding: auto;
+}
