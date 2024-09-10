@@ -1,6 +1,6 @@
 <?php
-//include_once "../Conexao/Conexao.php"; 
-//include_once '../Conexao/ConfigConexao.php'; 
+//include_once __DIR__ . "../Conexao/Conexao.php"; 
+include_once __DIR__ . '/../Conexao/ConfigConexao.php'; 
 
 
 //$db = "bdinfoquest";

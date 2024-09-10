@@ -1,10 +1,10 @@
 <?php
 
-include_once 'Conexao.php';
+include_once __DIR__ . '/Conexao.php';
 
 $db = "bdinfoquest";      
 $usuario = "root";   
-$senha = " ";       
+$senha = "";       
 
 $conexao = conectar($db, $usuario, $senha);
 
