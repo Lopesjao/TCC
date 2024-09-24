@@ -1,6 +1,6 @@
 <?php
-include_once 'Model/Aluno.php';
-include_once 'Conexao/Conexao.php';
+include_once __DIR__ . '/../Model/Aluno.php';
+include_once  __DIR__ . '/../Conexao/Conexao.php';
 
 class AlunoController
 {
@@ -14,7 +14,7 @@ class AlunoController
     public function insertAluno(Aluno $aluno)
     {
         $pstmt = $this->conexao->prepare("INSERT INTO aluno 
-    (nome, email, matricula ,dataNasc, senha) VALUES 
+    (nome, email, Matricula ,dataNasc, senha) VALUES 
     (?,?,?,?,?)");
         $pstmt->bindValue(1, $aluno->getNome());
         $pstmt->bindValue(2, $aluno->getEmail());
@@ -22,6 +22,7 @@ class AlunoController
         $pstmt->bindValue(4, $aluno->getDataNasc());
         $pstmt->bindValue(5, $aluno->getSenha());
         $pstmt->execute();
+        var_dump($aluno);
         return $pstmt;
     }
     
