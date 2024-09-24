@@ -1,13 +1,34 @@
 <?php
-//include_once __DIR__ . "../Conexao/Conexao.php"; 
+include_once __DIR__ . '/../Model/Aluno.php';
+include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Conexao/ConfigConexao.php'; 
 
 
-//$db = "bdinfoquest";
-//$usuario = "root";
-//$senha = " ";
-//$conexao = conectar($db, $usuario, $senha);
 
+if (isset($_POST['cadastrar'])) {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $matricula = $_POST['matricula'];
+    $dataNasc = $_POST['datanasc'];
+    $senha = $_POST['senha'];
+
+    $aluno = new Aluno();
+    $aluno->setNome($nome);
+    $aluno->setEmail($email);
+    $aluno->setMatricula($matricula);
+    $aluno->setDataNasc($dataNasc);
+    $aluno->setSenha($senha);
+
+   
+    $alunoController = new AlunoController();
+    $resultado = $alunoController->insertAluno($aluno);
+
+    if ($resultado) {
+        echo "Aluno cadastrado com sucesso!";
+    } else {
+        echo "Erro ao cadastrar aluno!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +46,17 @@ include_once __DIR__ . '/../Conexao/ConfigConexao.php';
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
-    
+
         <label for="matricula">Matrícula:</label>
         <input type="text" id="matricula" name="matricula" required><br><br>
 
-        <input type="submit" value="Cadastrar">
+        <label for="datanasc">Data de Nascimento:</label>
+        <input type="date" id="datanasc" name="datanasc" required><br><br>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required><br><br>
+
+        <input type="submit" name="cadastrar" value="Cadastrar">
     </form>
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Set-2024 às 19:10
+-- Tempo de geração: 24-Set-2024 às 20:11
 -- Versão do servidor: 10.4.8-MariaDB
 -- versão do PHP: 7.1.33
 
@@ -25,40 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `administrador`
---
-
-CREATE TABLE `administrador` (
-  `IDAdmin` int(11) NOT NULL,
-  `IsAdmin` tinyint(1) DEFAULT NULL,
-  `IDPessoa` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
   `IDAluno` int(11) NOT NULL,
-  `MatAluno` varchar(50) DEFAULT NULL,
-  `IsAluno` tinyint(1) DEFAULT NULL,
-  `IDPessoa` int(11) DEFAULT NULL
+  `Nome` varchar(100) NOT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `Matricula` varchar(50) DEFAULT NULL,
+  `DataNasc` date NOT NULL,
+  `senha` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pessoa`
+-- Estrutura da tabela `aluno_turma`
 --
 
-CREATE TABLE `pessoa` (
-  `IDPessoa` int(11) NOT NULL,
-  `Nome` varchar(100) DEFAULT NULL,
-  `Senha` varchar(50) DEFAULT NULL,
-  `DataNasc` date DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL
+CREATE TABLE `aluno_turma` (
+  `IDAluno` int(11) NOT NULL,
+  `IDTurma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -68,10 +55,12 @@ CREATE TABLE `pessoa` (
 --
 
 CREATE TABLE `professor` (
-  `IDProf` int(11) NOT NULL,
-  `IsProf` tinyint(1) DEFAULT NULL,
-  `MatProf` varchar(50) DEFAULT NULL,
-  `IDPessoa` int(11) DEFAULT NULL
+  `IDProfessor` int(11) NOT NULL,
+  `Nome` varchar(100) NOT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `Matricula` varchar(50) DEFAULT NULL,
+  `DataNasc` date NOT NULL,
+  `senha` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -82,19 +71,8 @@ CREATE TABLE `professor` (
 
 CREATE TABLE `turma` (
   `IDTurma` int(11) NOT NULL,
-  `Nome` varchar(100) DEFAULT NULL,
-  `IDProf` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `turmaaluno`
---
-
-CREATE TABLE `turmaaluno` (
-  `IDTurma` int(11) NOT NULL,
-  `IDAluno` int(11) NOT NULL
+  `Nome` varchar(100) NOT NULL,
+  `IDProfessor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -102,55 +80,34 @@ CREATE TABLE `turmaaluno` (
 --
 
 --
--- Índices para tabela `administrador`
---
-ALTER TABLE `administrador`
-  ADD PRIMARY KEY (`IDAdmin`),
-  ADD KEY `IDPessoa` (`IDPessoa`);
-
---
 -- Índices para tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`IDAluno`),
-  ADD KEY `IDPessoa` (`IDPessoa`);
+  ADD PRIMARY KEY (`IDAluno`);
 
 --
--- Índices para tabela `pessoa`
+-- Índices para tabela `aluno_turma`
 --
-ALTER TABLE `pessoa`
-  ADD PRIMARY KEY (`IDPessoa`);
+ALTER TABLE `aluno_turma`
+  ADD PRIMARY KEY (`IDAluno`,`IDTurma`),
+  ADD KEY `IDTurma` (`IDTurma`);
 
 --
 -- Índices para tabela `professor`
 --
 ALTER TABLE `professor`
-  ADD PRIMARY KEY (`IDProf`),
-  ADD KEY `IDPessoa` (`IDPessoa`);
+  ADD PRIMARY KEY (`IDProfessor`);
 
 --
 -- Índices para tabela `turma`
 --
 ALTER TABLE `turma`
   ADD PRIMARY KEY (`IDTurma`),
-  ADD KEY `IDProf` (`IDProf`);
-
---
--- Índices para tabela `turmaaluno`
---
-ALTER TABLE `turmaaluno`
-  ADD PRIMARY KEY (`IDTurma`,`IDAluno`),
-  ADD KEY `IDAluno` (`IDAluno`);
+  ADD KEY `IDProfessor` (`IDProfessor`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
-
---
--- AUTO_INCREMENT de tabela `administrador`
---
-ALTER TABLE `administrador`
-  MODIFY `IDAdmin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `aluno`
@@ -159,16 +116,10 @@ ALTER TABLE `aluno`
   MODIFY `IDAluno` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `pessoa`
---
-ALTER TABLE `pessoa`
-  MODIFY `IDPessoa` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `professor`
 --
 ALTER TABLE `professor`
-  MODIFY `IDProf` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDProfessor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `turma`
@@ -181,35 +132,17 @@ ALTER TABLE `turma`
 --
 
 --
--- Limitadores para a tabela `administrador`
+-- Limitadores para a tabela `aluno_turma`
 --
-ALTER TABLE `administrador`
-  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`IDPessoa`) REFERENCES `pessoa` (`IDPessoa`);
-
---
--- Limitadores para a tabela `aluno`
---
-ALTER TABLE `aluno`
-  ADD CONSTRAINT `aluno_ibfk_1` FOREIGN KEY (`IDPessoa`) REFERENCES `pessoa` (`IDPessoa`);
-
---
--- Limitadores para a tabela `professor`
---
-ALTER TABLE `professor`
-  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`IDPessoa`) REFERENCES `pessoa` (`IDPessoa`);
+ALTER TABLE `aluno_turma`
+  ADD CONSTRAINT `aluno_turma_ibfk_1` FOREIGN KEY (`IDAluno`) REFERENCES `aluno` (`IDAluno`),
+  ADD CONSTRAINT `aluno_turma_ibfk_2` FOREIGN KEY (`IDTurma`) REFERENCES `turma` (`IDTurma`);
 
 --
 -- Limitadores para a tabela `turma`
 --
 ALTER TABLE `turma`
-  ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`IDProf`) REFERENCES `professor` (`IDProf`);
-
---
--- Limitadores para a tabela `turmaaluno`
---
-ALTER TABLE `turmaaluno`
-  ADD CONSTRAINT `turmaaluno_ibfk_1` FOREIGN KEY (`IDTurma`) REFERENCES `turma` (`IDTurma`),
-  ADD CONSTRAINT `turmaaluno_ibfk_2` FOREIGN KEY (`IDAluno`) REFERENCES `aluno` (`IDAluno`);
+  ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`IDProfessor`) REFERENCES `professor` (`IDProfessor`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

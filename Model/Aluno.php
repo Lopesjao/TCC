@@ -4,6 +4,8 @@ class Aluno
     private $IDAluno;
     private $nome;
     private $email;
+
+    private $Matricula;
     private $dataNasc;
     private $senha;
     public function __construct()
@@ -56,6 +58,17 @@ class Aluno
         $this->email = $email;
     }
 
+    public function getMatricula()
+    {
+        return $this->Matricula;
+    }
+    
+    public function setMatricula($matricula)
+    {
+        $this->Matricula = $matricula;
+    }
+    
+
     public function getDataNasc()
     {
         return $this->dataNasc;
@@ -78,7 +91,7 @@ class Aluno
     public function __toString()
     {
         return "Aluno[IDAluno=". $this->IDAluno. ", nome=". $this->nome. 
-        ", email=". $this->email. ", dataNasc=". $this->dataNasc. ", senha=". $this->senha. "]";
+        ", email=". $this->email.  ", matricula=". $this->Matricula.", dataNasc=". $this->dataNasc. ", senha=". $this->senha.  "]";
     }
 
     
