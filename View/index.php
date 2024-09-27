@@ -69,10 +69,6 @@
         <div id="pasteHere" class="mt-4"></div>
     </div>
 
-    <script src="<?=HOME?>src/View/Js/jquery-3.7.1.min.js"></script>
-    <script src="<?=HOME?>src/View/Js/toast.js"></script>
-    <script src="<?=HOME?>src/View/Js/comandosAjax.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
 </body>
 </html>

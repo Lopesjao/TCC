@@ -42,6 +42,9 @@ if (isset($_POST['cadastrar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Aluno</title>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="bdinfoquest-436819">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
@@ -64,6 +67,39 @@ if (isset($_POST['cadastrar'])) {
 
         <input type="submit" name="cadastrar" value="Cadastrar">
     </form>
+    <div class="user">
+     
+      <h1>Olá, <span id="user-name">visitante</span>!</h1>
+      <p id="user-email"></p>
+    </div>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-width="370" data-height="50" data-longtitle="true" data-lang="pt-BR"></div>
+ 
+    <script>
+      function onSignIn(response) {
+            // Conseguindo as informações do seu usuário:
+            var perfil = response.getBasicProfile();
+ 
+            // Conseguindo o ID do Usuário
+            var userID = perfil.getId();
+ 
+            // Conseguindo o Nome do Usuário
+            var userName = perfil.getName();
+ 
+            // Conseguindo o E-mail do Usuário
+            var userEmail = perfil.getEmail();
+ 
+            // Conseguindo a URL da Foto do Perfil
+            var userPicture = perfil.getImageUrl();
+ 
+            document.getElementById('user-photo').src = userPicture;
+            document.getElementById('user-name').innerText = userName;
+            document.getElementById('user-email').innerText = userEmail;
+ 
+            // Recebendo o TOKEN que você usará nas demais requisições à API:
+            var LoR = response.getAuthResponse().id_token;
+            console.log("~ le Tolkien: " + LoR);
+        };
+    </script>
 </body>
 
 </html>
