@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../Model/Aluno.php';
-include_once  __DIR__ . '/../Conexao/Conexao.php';
+include_once __DIR__ . '/../Conexao/Conexao.php';
 
 class AlunoController
 {
@@ -25,10 +25,11 @@ class AlunoController
         var_dump($aluno);
         return $pstmt;
     }
-    
-    
-    
-    public function selectAlunoVerficaLogin($email, $senha){
+
+
+
+    public function selectAlunoVerificaLogin($email, $senha)
+    {
         // Verifica se o email existe
         $pstmt = $this->conexao->prepare("SELECT * FROM aluno WHERE email = ?");
         $pstmt->bindValue(1, $email);
@@ -37,8 +38,8 @@ class AlunoController
         if ($pstmt->rowCount() > 0) {
             // Se o email existe, verificar a senha
             $user = $pstmt->fetch(PDO::FETCH_ASSOC);
-            
-            // Use password_verify para comparar a senha
+    
+            // Verifica a senha usando password_verify() para comparar com o hash
             if ($senha == $user['senha']) {
                 $_SESSION["IDAluno"] = $user['IDAluno'];
                 return true; // Login bem-sucedido
@@ -49,7 +50,48 @@ class AlunoController
             return "email_nao_encontrado"; // Email não encontrado
         }
     }
+    
+    public function login()
+    {
+        $login = new Login($_POST);
+        $stmt = $this->conexao->prepare("SELECT * FROM aluno WHERE email = :email");
+        $stmt->bindValue(":email", $login->getEmail());
+        $stmt->execute();
+        $linha = $stmt->fetch();
+        if ($linha != null) {
 
+            if ($linha['senha'] == $login->getSenha()) {
+                $login->atualizar($linha); // Atualiza os demais atributos...
+                session_start();
+                session_regenerate_id();
+                $sessaoID = session_id();
+
+                $stmt = $this->conexao->prepare("UPDATE usuario SET sessaoID = :sessaoID WHERE id = :id");
+                $stmt->bindValue(":sessaoID", $sessaoID);
+                $stmt->bindValue(":id", $login->getId());
+                $stmt->execute();
+
+                $_SESSION['id'] = $linha['id'];
+                $_SESSION['sessaoID'] = $sessaoID;
+
+                echo "DEU CERTO:";
+                header('location:../Home.php');
+            } else {
+                header('location:../index.php?erro');
+            }
+        } else {
+            header('location:../index.php?erro');
+        }
+    }
+
+    public function logout()
+    {
+        session_id($_SESSION['sessaoID']);
+        session_start();
+        $_SESSION = array();
+        session_destroy();
+        header('location:../index.php');
+    }
 
 
 }

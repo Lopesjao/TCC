@@ -69,7 +69,7 @@ if (isset($_POST['cadastrar'])) {
 
             <div class="mb-3">
                 <label for="matricula" class="form-label">Matrícula:</label>
-                <input type="text" id="matricula" name="matricula" class="form-control" required>
+                <input type="text" id="matricula" name="Matricula" class="form-control" required>
             </div>
 
             <div class="mb-3">
