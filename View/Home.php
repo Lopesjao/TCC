@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_sessao'])) {
-    //header('Location:login.php');
-  //  exit();
-}
+//if (!isset($_SESSION['usuario_sessao'])) {
+  //  header('Location:login.php');
+  //exit();
+//}
 ?>
 
 
@@ -14,6 +14,8 @@ if (!isset($_SESSION['usuario_sessao'])) {
 
 <head>
     <?php require_once "navbar.php"; ?>
+    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1>
+    <a href="logout.php">Logout</a> <!-- Link para logout -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial</title>

@@ -27,7 +27,8 @@ class AlunoController
     }
 
 
-
+//esse é meu metodo de verificar o login como n estou usando hash na senha acredito
+// que seria so verificar se é igual com o do banco
     public function selectAlunoVerificaLogin($email, $senha)
     {
         // Verifica se o email existe
@@ -36,21 +37,20 @@ class AlunoController
         $pstmt->execute();
     
         if ($pstmt->rowCount() > 0) {
-            // Se o email existe, verificar a senha
-            $user = $pstmt->fetch(PDO::FETCH_ASSOC);
-    
-            // Verifica a senha usando password_verify() para comparar com o hash
-            if ($senha == $user['senha']) {
-                $_SESSION["IDAluno"] = $user['IDAluno'];
-                return true; // Login bem-sucedido
+            $aluno = $pstmt->fetch(PDO::FETCH_ASSOC);
+    var_dump($aluno);
+       
+            if ($senha == $aluno['senha']) {
+               // $_SESSION["IDAluno"] = $user['IDAluno'];
+                return $aluno; 
             } else {
-                return "senha_incorreta"; // Senha incorreta
+                return "senha_incorreta"; 
             }
         } else {
-            return "email_nao_encontrado"; // Email não encontrado
+            return "email_nao_encontrado"; 
         }
     }
-    
+    //aqui coloquei o seu login do seu sistema mas nao estou utilizando ele
     public function login()
     {
         $login = new Login($_POST);

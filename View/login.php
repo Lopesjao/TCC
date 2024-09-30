@@ -1,10 +1,23 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_sessao'])) {
-    //header('Location:login.php');
-    //  exit();
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
+    
+    include_once __DIR__ . '/../Control/AlunoControle.php';
+    $alunoController = new AlunoController();
+    $resultado = $alunoController->selectAlunoVerificaLogin($email, $senha);
+
+    if ($resultado) {
+       
+        $_SESSION['usuario_sessao'] = $email;
+        header('Location: Home.php'); 
+        exit();
+    } else {
+        echo "Erro ao realizar login!";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +30,7 @@ if (!isset($_SESSION['usuario_sessao'])) {
 
 <body>
     <?php require_once "navbar.php"; ?>
-    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> <!-- Exibe o usuário logado -->
-
+    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> 
 
     <h1>Login</h1>
     <form action="login.php" method="POST">
@@ -35,28 +47,6 @@ if (!isset($_SESSION['usuario_sessao'])) {
 </html>
 
 <?php
-
-include_once __DIR__ . '/../Model/Aluno.php';
-include_once __DIR__ . '/../Control/AlunoControle.php';
-include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-
-    $email = $_POST['email'];
-$senha = $_POST['senha'];
-
-$alunoController = new AlunoController();
-$resultado = $alunoController->selectAlunoVerificaLogin($email, $senha);
-//var_dump($resultado);
-
-
-if ($resultado) {
-    $_SESSION['usuario_sessao'] = $email;
-    echo "Login efetuado com sucesso!";
-    //header('Location: Home.php');
-} else {
-    echo "Erro ao realizar login!";
-}
 
 ?>
 
