@@ -14,7 +14,7 @@ class AlunoController
     public function insertAluno(Aluno $aluno)
     {
         $pstmt = $this->conexao->prepare("INSERT INTO aluno 
-    (nome, email, Matricula ,dataNasc, senha) VALUES 
+    (nome, email, matricula ,dataNasc, senha) VALUES 
     (?,?,?,?,?)");
         $pstmt->bindValue(1, $aluno->getNome());
         $pstmt->bindValue(2, $aluno->getEmail());
@@ -38,16 +38,19 @@ class AlunoController
     
         if ($pstmt->rowCount() > 0) {
             $aluno = $pstmt->fetch(PDO::FETCH_ASSOC);
-    var_dump($aluno);
+            $aluno = new Aluno($aluno);
+            
+            ////var_dump($aluno);
+            //echo $aluno;
        
-            if ($senha == $aluno['senha']) {
-               // $_SESSION["IDAluno"] = $user['IDAluno'];
-                return $aluno; 
+            if ($senha == $aluno->getSenha()) {
+                $_SESSION["aluno"] = serialize($aluno);
+                return true; 
             } else {
-                return "senha_incorreta"; 
+                return false; 
             }
         } else {
-            return "email_nao_encontrado"; 
+            return false; 
         }
     }
     //aqui coloquei o seu login do seu sistema mas nao estou utilizando ele

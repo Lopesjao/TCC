@@ -1,11 +1,11 @@
 <?php
 class Aluno
 {
-    private $IDAluno;
+    private $idAluno;
     private $nome;
     private $email;
 
-    private $Matricula;
+    private $matricula;
     private $dataNasc;
     private $senha;
     public function __construct()
@@ -28,14 +28,14 @@ class Aluno
         }
     }
     
-    public function getIdAluno()
+    public function getidAluno()
     {
-        return $this->IDAluno;
+        return $this->idAluno;
     }
 
-    public function setIdAluno($IDAluno)
+    public function setIdAluno($idAluno)
     {
-        $this->IDAluno = $IDAluno;
+        $this->idAluno = $idAluno;
     }
     
     public function getNome()
@@ -60,12 +60,12 @@ class Aluno
 
     public function getMatricula()
     {
-        return $this->Matricula;
+        return $this->matricula;
     }
     
     public function setMatricula($matricula)
     {
-        $this->Matricula = $matricula;
+        $this->matricula = $matricula;
     }
     
 
@@ -90,8 +90,8 @@ class Aluno
     }
     public function __toString()
     {
-        return "Aluno[IDAluno=". $this->IDAluno. ", nome=". $this->nome. 
-        ", email=". $this->email.  ", matricula=". $this->Matricula.", dataNasc=". $this->dataNasc. ", senha=". $this->senha.  "]";
+        return "Aluno[idAluno=". $this->idAluno. ", nome=". $this->nome. 
+        ", email=". $this->email.  ", matricula=". $this->matricula.", dataNasc=". $this->dataNasc. ", senha=". $this->senha.  "]";
     }
 
     

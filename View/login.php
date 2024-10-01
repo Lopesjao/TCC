@@ -1,4 +1,6 @@
 <?php
+include_once __DIR__ . '/../Model/Aluno.php';
+
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -9,9 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $alunoController = new AlunoController();
     $resultado = $alunoController->selectAlunoVerificaLogin($email, $senha);
 
+    //echo "<h1>RESULTADO: </h1>";
+    //var_dump($resultado);
+
     if ($resultado) {
-       
-        $_SESSION['usuario_sessao'] = $email;
+        session_regenerate_id();
+        $aluno = new Aluno(unserialize($_SESSION["aluno"]));
+        //var_dump($aluno);
+        $_SESSION['usuario_sessao'] = $aluno->getEmail();
+        
         header('Location: Home.php'); 
         exit();
     } else {
