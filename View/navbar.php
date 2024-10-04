@@ -15,7 +15,7 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="Home.php" ; ">
-                <img src="" alt=" Logo" width="40" height="40" class="d-inline-block align-text-top">
+                <img src="imagens/logo.png" alt=" Logo" width="80" height="80" class="d-inline-block align-text-top">
             </a>
 
 
@@ -42,7 +42,7 @@
                         <a class="btn btn-primary" href="login.php" role="button">Login</a>
                     </li>
                     <li class="nav-item">
-                    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> <!-- Exibe o usuário logado -->
+                    <h1>Bem-vindo, <?php //echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> <!-- Exibe o usuário logado -->
                     </li>
                 </ul>
             </div>
