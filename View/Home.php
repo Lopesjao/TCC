@@ -14,7 +14,7 @@ session_start();
 
 <head>
     <?php require_once "navbar.php"; ?>
-    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1>
+    <!--<h1>Bem-vindo, <?php //echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1>-->
     <a href="logout.php">Logout</a> <!-- Link para logout -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@ session_start();
 
     <div class="container-fluid center-content">
         <!-- Logo no centro -->
-        <img src="logo.png" alt="Logo" class="logo">
+        <img src="imagens/tela.png" alt="Logo" class="logo">
 
         <!-- Botões de Login/Cadastro -->
         <p>Sou Aluno:</p>

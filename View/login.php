@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php require_once "navbar.php"; ?>
-    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> 
+    <h1>Bem-vindo, <?php e//cho htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> 
 
     <h1>Login</h1>
     <form action="login.php" method="POST">

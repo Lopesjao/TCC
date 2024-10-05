@@ -14,7 +14,7 @@ session_start();
 
 <head>
     <?php require_once "navbar.php"; ?>
-    <h1>Bem-vindo, <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1>
+    <h1>Bem-vindo, <?php //echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1>
     <a href="logout.php">Logout</a> <!-- Link para logout -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,8 @@ session_start();
     <!-- Link do Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Style.css"> 
+    
+
     <style>
       
      
@@ -32,7 +34,7 @@ session_start();
 
     <div class="container-fluid center-content">
         <!-- Logo no centro -->
-        <img src="logo.png" alt="Logo" class="logo">
+        <img src="imagens/tela.png" alt="Logo" width="100" height="100" class="d-inline-block align-text-top"  >
 
         <!-- Botões de Login/Cadastro -->
         <p>Sou Aluno:</p>
@@ -44,6 +46,7 @@ session_start();
 
     <!-- Link do Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="controleQuestoes.js"></script>
 </body>
 
 </html>
