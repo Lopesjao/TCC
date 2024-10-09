@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Set-2024 às 20:11
--- Versão do servidor: 10.4.8-MariaDB
--- versão do PHP: 7.1.33
+-- Tempo de geração: 09-Out-2024 às 19:50
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,13 +28,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `aluno` (
-  `IDAluno` int(11) NOT NULL,
-  `Nome` varchar(100) NOT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `Matricula` varchar(50) DEFAULT NULL,
-  `DataNasc` date NOT NULL,
+  `idAluno` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `matricula` varchar(50) DEFAULT NULL,
+  `dataNasc` date NOT NULL,
   `senha` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `aluno`
+--
+
+INSERT INTO `aluno` (`idAluno`, `nome`, `email`, `matricula`, `dataNasc`, `senha`) VALUES
+(1, 'Gustavo', 'gustavo@gmail.com', '123', '2024-10-01', '123');
 
 -- --------------------------------------------------------
 
@@ -83,7 +89,7 @@ CREATE TABLE `turma` (
 -- Índices para tabela `aluno`
 --
 ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`IDAluno`);
+  ADD PRIMARY KEY (`idAluno`);
 
 --
 -- Índices para tabela `aluno_turma`
@@ -113,7 +119,7 @@ ALTER TABLE `turma`
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `IDAluno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `professor`
