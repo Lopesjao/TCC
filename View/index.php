@@ -33,8 +33,7 @@ session_start();
 <body>
 
     <div class="container-fluid center-content">
-        <!-- Logo no centro -->
-        <img src="imagens/tela.png" alt="Logo" width="100" height="100" class="d-inline-block align-text-top"  >
+         
 
         <!-- Botões de Login/Cadastro -->
         <p>Sou Aluno:</p>

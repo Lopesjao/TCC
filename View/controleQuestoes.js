@@ -1,4 +1,4 @@
-//window.onload = main;
+window.onload = main;
 
 $(document).ready(main);
 

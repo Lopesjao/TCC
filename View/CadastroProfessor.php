@@ -1,20 +1,20 @@
 <?php
-include_once __DIR__ . '/../Model/Aluno.php';
-include_once __DIR__ . '/../Control/AlunoControle.php';
+include_once __DIR__ . '/../Model/Professor.php';
+include_once __DIR__ . '/../Control/ProfessorControle.php';
 include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
 require_once('Config.php');
 
 if (isset($_POST['cadastrar'])) {
-    $aluno = new Aluno($_POST);
-    $aluno->setDataNasc(date("Y-m-d H:i:s", strtotime($_POST['datanasc'])));
+    $professor = new Professor($_POST);
+    $professor->setDataNasc(date("Y-m-d H:i:s", strtotime($_POST['datanasc'])));
     var_dump($_POST);
-    $alunoController = new AlunoController();
-    $resultado = $alunoController->insertAluno($aluno);
+    $ProfessorController = new ProfessorController();
+    $resultado = $ProfessorController->insertProf($professor);
 
     if ($resultado) {
-        echo "Aluno cadastrado com sucesso!";
+        echo "Professor cadastrado com sucesso!";
     } else {
-        echo "Erro ao cadastrar aluno!";
+        echo "Erro ao cadastrar professor!";
     }
 }
 ?>
@@ -25,7 +25,7 @@ if (isset($_POST['cadastrar'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Aluno</title>
+    <title>Cadastro de Professor</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css"> 
     
@@ -40,8 +40,8 @@ if (isset($_POST['cadastrar'])) {
     <?php require_once "navbar.php"; ?>
 
     <div class="container mt-5">
-    <h1 class="text-center">Cadastro de Aluno</h1>
-    <form action="CadastroAluno.php" method="POST" class="mt-4">
+    <h1 class="text-center">Cadastro de Professor</h1>
+    <form action="CadastroProfessor.php" method="POST" class="mt-4">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" id="nome" name="nome" class="form-control" required>

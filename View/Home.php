@@ -32,14 +32,14 @@ session_start();
 
     <div class="container-fluid center-content">
         <!-- Logo no centro -->
-        <img src="imagens/tela.png" alt="Logo" class="logo">
+ 
 
         <!-- Botões de Login/Cadastro -->
         <p>Sou Aluno:</p>
         <a class="btn btn-primary btn-lg btn-space" href="CadastroAluno.php" role="button">Login / Cadastro</a>
 
         <p class="btn-space">Sou Professor:</p>
-        <a class="btn btn-secondary btn-lg btn-space" href="login_professor.php" role="button">Login / Cadastro</a>
+        <a class="btn btn-secondary btn-lg btn-space" href="CadastroProfessor.php" role="button">Login / Cadastro</a>
     </div>
 
     <!-- Link do Bootstrap JS -->
