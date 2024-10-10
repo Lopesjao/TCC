@@ -1,3 +1,14 @@
+<?php
+if (!isset($_SESSION)){
+session_start();
+}
+//if (!isset($_SESSION['usuario_sessao'])) {
+//  header('Location:login.php');
+//exit();
+//}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +20,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .custom-navbar {
-            background-color: #2D55AD; /* Cor personalizada */
+            background-color: #2D55AD;
+            /* Cor personalizada */
         }
     </style>
 </head>
@@ -20,7 +32,8 @@
         <div class="container-fluid">
 
             <a class="navbar-brand" href="Home.php" ; ">
-                <img src="imagens/logo.png" alt=" Logo" width="180" height="120" class="d-inline-block align-text-top">
+                <img src=" imagens/logo.png" alt=" Logo" width="180" height="120"
+                class="d-inline-block align-text-top">
             </a>
 
 
@@ -42,12 +55,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="quiz.php">Quiz</a>
                     </li>
+                    <?php
+                    if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
+                        //echo "é professor";
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="quiz.php">Turma</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
 
                     <li class="nav-item">
                         <a class="btn btn-primary" href="login.php" role="button">Login</a>
                     </li>
                     <li class="nav-item">
-                  <!--<h1>Bem-vindo, <?php //echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> <!-- Exibe o usuário logado -->
+                        <!--<h1>Bem-vindo, <?php //echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> <!-- Exibe o usuário logado -->
                     </li>
                 </ul>
             </div>

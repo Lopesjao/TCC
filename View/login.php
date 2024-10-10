@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $aluno = new Aluno(unserialize($_SESSION["aluno"]));
         //var_dump($aluno);
         $_SESSION['usuario_sessao'] = $aluno->getEmail();
+        $_SESSION['tipo'] = "aluno";
         
         header('Location: Home.php'); 
         exit();
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $prof = new Professor(unserialize($_SESSION["professor"]));
         //var_dump($aluno);
         $_SESSION['usuario_sessao'] = $prof->getEmail();
+        $_SESSION['tipo'] = "prof";
         
         header('Location: Home.php'); 
         exit();
@@ -38,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Erro ao realizar login!";
     }
 
-      
+ 
     
 }
 ?>
