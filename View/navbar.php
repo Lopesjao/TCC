@@ -60,15 +60,30 @@ session_start();
                         //echo "é professor";
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="quiz.php">Turma</a>
+                            <a class="nav-link" href="turma.php">Turma</a>
                         </li>
                         <?php
                     }
                     ?>
 
-                    <li class="nav-item">
+                  
+                    <?php
+                    if (isset($_SESSION['tipo'])) {
+                        //echo "é professor";
+                        ?>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="logout.php">Sair</a>
+                        </li>
+                        <?php
+                    
+                    }else{
+                      ?>
+                      <li class="nav-item">
                         <a class="btn btn-primary" href="login.php" role="button">Login</a>
                     </li>
+                      <?php  
+                    }
+                    ?>
                     <li class="nav-item">
                         <!--<h1>Bem-vindo, <?php //echo htmlspecialchars($_SESSION['usuario_sessao']); ?>!</h1> <!-- Exibe o usuário logado -->
                     </li>
