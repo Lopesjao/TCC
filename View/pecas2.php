@@ -7,22 +7,31 @@
     <title>Componentes Interativos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
-        .card {
-            transition: transform 0.3s ease-in-out;
-            align-items: center;
-            width: 70%; /* Diminui o tamanho do card */
-            margin: 10px auto; /* Centraliza os cards na tela */
+        .image-container {
+            position: relative;
+            margin: 0 10px; /* Espaço entre as imagens */
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .card-image img {
+        .image-container img {
             max-width: 100%;
-            height: 250px; /* Ajusta a altura da imagem */
-            object-fit: cover; /* Garante que a imagem ocupe bem o espaço */
+            height: auto;
+        }
+
+        .images-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px; /* Espaçamento entre imagens */
+        }
+
+        .hotspot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+            border-radius: 50%;
             cursor: pointer;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -32,31 +41,27 @@
         <?php include_once 'navbar.php'; ?>
     </header>
     <div class="container mt-5">
-        <h1 class="text-center">Principais Componentes de um Computador</h1>
-        <div class="row mt-4">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="imagens/gabinete.png" alt="Gabinete" data-bs-toggle="modal" data-bs-target="#modalGabinete">
-                    </div>
-                    <div class="card-content">
-                        <h5 class="center-align">Gabinete</h5>
-                    </div>
-                </div>
+        <h1 class="text-center">Componentes Interativos</h1>
+        <div class="images-wrapper mt-4">
+            <!-- Primeiro contêiner -->
+            <div class="image-container">
+                <img src="imagens/gabinete.png" alt="Gabinete">
+                <!-- Ponto interativo -->
+                <div class="hotspot" style="top: 70%; left: 50%;"  data-bs-placement="top"
+                    title="Gabinete" data-bs-target="#modalGabinete" data-bs-toggle="tooltip"></div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="imagens/placamae.png" alt="Placa-mãe" data-bs-toggle="modal" data-bs-target="#modalPlacaMae">
-                    </div>
-                    <div class="card-content">
-                        <h5 class="center-align">Placa-mãe</h5>
-                    </div>
-                </div>
+            <!-- Segundo contêiner -->
+            <div class="image-container">
+                <img src="imagens/placamae.png" alt="Placa-mãe">
+                <!-- Ponto interativo -->
+                <div class="hotspot" style="top: 20%; left: 50%;" data-bs-placement="top"
+                    title="Placa-mãe" data-bs-target="#modalPlacaMae" data-bs-toggle="modal"></div>
             </div>
         </div>
     </div>
 
+    <!-- Modals -->
+    <!-- Modal Gabinete -->
     <div class="modal fade" id="modalGabinete" tabindex="-1" aria-labelledby="modalGabineteLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -75,6 +80,7 @@
         </div>
     </div>
 
+    <!-- Modal Placa-mãe -->
     <div class="modal fade" id="modalPlacaMae" tabindex="-1" aria-labelledby="modalPlacaMaeLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -94,6 +100,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltips.forEach(t => new bootstrap.Tooltip(t));
+    </script>
 </body>
 
 </html>

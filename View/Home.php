@@ -13,7 +13,9 @@ if(isset($_SESSION['tipo']) && ($_SESSION['tipo'])=="prof"){
     echo "é professor";
 
   }else{
+    if(isset($_SESSION['tipo']) && ($_SESSION['tipo'])==""){
     echo "é aluno";
+    }
   }
 
 ?>
