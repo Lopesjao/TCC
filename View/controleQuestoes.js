@@ -7,8 +7,6 @@ function main() {
   document.getElementById("reinicia").addEventListener("click", reiniciar);
   document.getElementById("comeca").addEventListener("click", function () {
     exibirQuestao();
-    //document.getElementById("comeca").style.display = "none";
-    //document.getElementById("reinicia").style.display = "inline";
   });
 }
 
@@ -19,26 +17,52 @@ function reiniciar() {
   document.getElementById("reinicia").style.display = "none";
   document.getElementById("comeca").style.display = "inline";
 }
+
 function exibirQuestao() {
   var questoes = [
     {
-      pergunta: "Quem é essa pessoa?",
-      imagem: "../imgs/banner_Steve_Jobs.png",
+      pergunta:
+        "Se o computador não liga, qual deve ser uma das primeiras verificações a serem feitas?",
       alternativas: [
-        { option: "Elon Musk", resposta: false },
-        { option: "Jeff Bezos", resposta: false },
-        { option: "Bill Gates", resposta: false },
-        { option: "Steve Jobs", resposta: true },
+        {
+          option: "Verificar se o computador está ligado na tomada",
+          resposta: true,
+        },
+        { option: "Substituir a memória RAM", resposta: false },
+        { option: "Atualizar os drivers do processador", resposta: false },
+        { option: "Desfragmentar o disco rígido", resposta: false },
       ],
     },
     {
-      pergunta: "Que peça de computador é essa?",
-      imagem: "../imgs/memoria4.png",
+      pergunta:
+        "Se o computador liga, mas após alguns segundos desliga, qual pode ser a causa?",
       alternativas: [
-        { option: "Memória RAM", resposta: true },
-        { option: "Processador", resposta: false },
-        { option: "Cooler", resposta: false },
-        { option: "Mouse", resposta: false },
+        {
+          option: "Verificar se a fonte de alimentação tem potência suficiente",
+          resposta: true,
+        },
+        { option: "Ajustar a resolução do monitor", resposta: false },
+        { option: "Verificar os drivers de áudio", resposta: false },
+        { option: "Trocar o cabo de rede", resposta: false },
+      ],
+    },
+    {
+      pergunta: "Se o monitor não exibe vídeo, qual é uma possível causa?",
+      alternativas: [
+        { option: "Cabo de vídeo com mau contato", resposta: true },
+        { option: "Computador com vírus", resposta: false },
+        { option: "Problema no processador", resposta: false },
+        { option: "Falha no disco rígido", resposta: false },
+      ],
+    },
+    {
+      pergunta:
+        "Qual ação pode corrigir um computador que se desconecta frequentemente da internet?",
+      alternativas: [
+        { option: "Atualizar os drivers de rede", resposta: true },
+        { option: "Substituir a placa gráfica", resposta: false },
+        { option: "Reinstalar o sistema operacional", resposta: false },
+        { option: "Trocar o teclado", resposta: false },
       ],
     },
   ];
@@ -49,9 +73,6 @@ function exibirQuestao() {
   questaoDiv.innerHTML = `
     <h3>Questão ${indiceAtual + 1}:</h3>
     <p>${questaoAtual.pergunta}</p>
-    <img src="${
-      questaoAtual.imagem
-    }" alt="Imagem da pessoa" style="width: 75%; height: 60%;">
     <div class="alternativas">
         ${questaoAtual.alternativas
           .map(

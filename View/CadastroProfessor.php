@@ -12,12 +12,17 @@ if (isset($_POST['cadastrar'])) {
     $resultado = $ProfessorController->insertProf($professor);
 
     if ($resultado) {
+        
         echo "Professor cadastrado com sucesso!";
     } else {
         echo "Erro ao cadastrar professor!";
     }
 }
+
 ?>
+<script>
+alert("cadastrado com sucesso");
+</script>
 
 <!DOCTYPE html>
 <html lang="pt-br">

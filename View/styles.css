@@ -1,0 +1,69 @@
+/* Estilos gerais */
+
+
+.container {
+    margin-top: 10%;
+    text-align: center;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+
+/* Questões e alternativas */
+.questao p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+.alternativas button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.alternativas button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.alternativas button:active {
+    background-color: #1d6a8c;
+    transform: scale(1);
+}
+
+.alternativas button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Botões de controle */
+#comeca, #reinicia {
+    background-color: #27ae60;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#comeca:hover, #reinicia:hover {
+    background-color: #2ecc71;
+}
+
+#reinicia {
+    display: none;
+}
+

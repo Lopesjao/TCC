@@ -1,0 +1,83 @@
+
+
+1. O que pode ser feito se o relógio do sistema operacional estiver atrasado?  
+A) Limpar o cache do navegador.  
+B) Substituir a pilha de lítio.  
+C) Atualizar os drivers da placa de som.  
+D) Redefinir o processador na BIOS.  
+
+Resposta correta: B) Substituir a pilha de lítio.  
+
+---
+
+2. Se um HD faz barulho constante, o que pode ser necessário verificar?  
+A) Compatibilidade do HD com o sistema operacional.  
+B) Integridade e compatibilidade do cabo de dados.  
+C) Configuração de resolução do monitor.  
+D) Nível de tinta na impressora.  
+
+Resposta correta: B) Integridade e compatibilidade do cabo de dados.  
+
+---
+
+3. O que pode causar distorção na imagem da tela?  
+A) Fonte de alimentação fraca.  
+B) Drivers de vídeo desatualizados.  
+C) Arquivos DLL corrompidos.  
+D) Conflito entre dois antivírus instalados.  
+
+Resposta correta: B) Drivers de vídeo desatualizados.  
+
+---
+
+4. O que pode ser uma solução para uma ventoinha barulhenta no computador?  
+A) Limpar a ventoinha e verificar se está bem encaixada.  
+B) Atualizar os drivers de som.  
+C) Ajustar a configuração de rede no painel de controle.  
+D) Desativar a inicialização rápida no Windows.  
+
+Resposta correta: A) Limpar a ventoinha e verificar se está bem encaixada.  
+
+---
+
+5. Se o computador está inicializando em uma tela preta, o que pode ser uma possível solução?  
+A) Remover a pasta térmica do processador.  
+B) Verificar as conexões do monitor e inicializar em modo de segurança.  
+C) Ajustar as configurações de overclock na BIOS.  
+D) Substituir os cabos de alimentação do teclado.  
+
+Resposta correta: B) Verificar as conexões do monitor e inicializar em modo de segurança.  
+
+---
+
+6. O que pode ser feito se arquivos DLL estão corrompidos?  
+A) Baixar os arquivos DLL ausentes de um site confiável.  
+B) Substituir o processador.  
+C) Reinstalar o sistema operacional imediatamente.  
+D) Formatar a unidade de armazenamento.  
+
+Resposta correta: A) Baixar os arquivos DLL ausentes de um site confiável.  
+
+---
+
+7. Qual ação pode corrigir um computador que se desconecta frequentemente da internet?  
+A) Atualizar os drivers de rede.  
+B) Substituir a placa gráfica.  
+C) Ajustar o brilho do monitor.  
+D) Reinstalar o driver do teclado.  
+
+Resposta correta: A) Atualizar os drivers de rede.  
+
+---
+
+8. O que pode ser feito se o computador inicializa lentamente?  
+A) Substituir os cabos VGA/HDMI.  
+B) Desativar programas de inicialização desnecessários.  
+C) Limpar o teclado físico.  
+D) Atualizar o firmware do estabilizador.  
+
+Resposta correta: B) Desativar programas de inicialização desnecessários.  
+
+---
+
+
