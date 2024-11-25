@@ -19,5 +19,10 @@ session_start();
 <body>
 <?php require_once "navbar.php"; ?>
     <h1> manutencao</h1>
+
+    
+
+    <footer>  <?php require_once "footer.php"; ?></footer>
+
 </body>
 </html>

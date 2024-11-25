@@ -1,6 +1,6 @@
 <?php
-if (!isset($_SESSION)){
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
 }
 //if (!isset($_SESSION['usuario_sessao'])) {
 //  header('Location:login.php');
@@ -23,6 +23,7 @@ session_start();
             background-color: #2D55AD;
             /* Cor personalizada */
         }
+       
     </style>
 </head>
 
@@ -66,7 +67,7 @@ session_start();
                     }
                     ?>
 
-                  
+
                     <?php
                     if (isset($_SESSION['tipo'])) {
                         //echo "é professor";
@@ -75,13 +76,13 @@ session_start();
                             <a class="btn btn-danger" href="logout.php">Sair</a>
                         </li>
                         <?php
-                    
-                    }else{
-                      ?>
-                      <li class="nav-item">
-                        <a class="btn btn-primary" href="login.php" role="button">Login</a>
-                    </li>
-                      <?php  
+
+                    } else {
+                        ?>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="login.php" role="button">Login</a>
+                        </li>
+                    <?php
                     }
                     ?>
                     <li class="nav-item">
@@ -90,8 +91,9 @@ session_start();
                 </ul>
             </div>
         </div>
-    </nav>
 
+    </nav>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

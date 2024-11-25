@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Informática</title>
     <script defer src="controleQuestoes.js"></script>
-    <link rel="stylesheet" href="styles.css">  <!-- Vincule o seu CSS aqui -->
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 
@@ -33,6 +33,8 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     </div>
+    <?php require_once "footer.php"; ?>
 </body>
+
 
 </html>

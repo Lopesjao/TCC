@@ -12,7 +12,7 @@ if (isset($_POST['cadastrar'])) {
     $resultado = $ProfessorController->insertProf($professor);
 
     if ($resultado) {
-        
+
         echo "Professor cadastrado com sucesso!";
     } else {
         echo "Erro ao cadastrar professor!";
@@ -21,7 +21,7 @@ if (isset($_POST['cadastrar'])) {
 
 ?>
 <script>
-alert("cadastrado com sucesso");
+    alert("cadastrado com sucesso");
 </script>
 
 <!DOCTYPE html>
@@ -100,7 +100,10 @@ alert("cadastrado com sucesso");
         });
     </script>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <footer> <?php require_once "footer.php"; ?></footer>
 </body>
+
 
 </html>
