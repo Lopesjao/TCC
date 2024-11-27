@@ -24,7 +24,8 @@
             max-width: 100%;
             height: 250px;
             /* Ajusta a altura da imagem */
-            object-fit: cover;
+            width: 150%;
+          object-fit: cover;
             /* Garante que a imagem ocupe bem o espaço */
             cursor: pointer;
         }
@@ -75,7 +76,7 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="imagens/hd.jpg" alt="HD" data-bs-toggle="modal" data-bs-target="#modalHD">
+                        <img src="imagens/HD2.png" alt="HD" data-bs-toggle="modal" data-bs-target="#modalHD">
                     </div>
                     <div class="card-content">
                         <h5 class="center-align">HD</h5>
@@ -313,6 +314,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<footer>  <?php require_once "footer.php"; ?></footer>
+<footer> <?php require_once "footer.php"; ?></footer>
 
 </html>
