@@ -22,10 +22,22 @@ class AlunoController
         $pstmt->bindValue(4, $aluno->getDataNasc());
         $pstmt->bindValue(5, $aluno->getSenha());
         $pstmt->execute();
-        var_dump($aluno);
+        //var_dump($aluno);
         return $pstmt;
     }
 
+    public function getAlunos() {
+        $conn = Conexao::getConexao();
+        $sql = "SELECT * FROM aluno";
+        $result = $conn->query($sql);
+        
+        $alunos = [];
+        while ($row = $result->fetch()) {
+            $alunos[] = $row;
+        }
+        
+        return $alunos;
+    }
 
 //esse é meu metodo de verificar o login como n estou usando hash na senha acredito
 // que seria so verificar se é igual com o do banco
@@ -95,6 +107,9 @@ class AlunoController
         session_destroy();
         header('location:../index.php');
     }
+
+
+
 
 
 }

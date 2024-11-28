@@ -7,15 +7,24 @@ require_once('Config.php');
 if (isset($_POST['cadastrar'])) {
     $aluno = new Aluno($_POST);
     $aluno->setDataNasc(date("Y-m-d H:i:s", strtotime($_POST['datanasc'])));
-    var_dump($_POST);
+    // var_dump($_POST);
     $alunoController = new AlunoController();
     $resultado = $alunoController->insertAluno($aluno);
 
-    if ($resultado) {
-        echo "Aluno cadastrado com sucesso!";
-    } else {
-        echo "Erro ao cadastrar aluno!";
+    try {
+        $alunoController = new AlunoController();
+        $resultado = $alunoController->insertAluno($aluno);
+
+        if ($resultado) {
+            echo "<div class='alert alert-success'>Aluno cadastrado com sucesso!</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Erro ao cadastrar aluno!</div>";
+        }
+    } catch (Exception $e) {
+        error_log("Erro ao cadastrar aluno: " . $e->getMessage());
+        echo "<div class='alert alert-danger'>Ocorreu um erro ao processar seu cadastro.</div>";
     }
+
 }
 ?>
 
@@ -98,7 +107,7 @@ if (isset($_POST['cadastrar'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <footer>  <?php require_once "footer.php"; ?></footer>
+    <footer> <?php require_once "footer.php"; ?></footer>
 </body>
 
 </html>
