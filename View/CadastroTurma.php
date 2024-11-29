@@ -6,7 +6,6 @@ include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
 require_once('Config.php');
 
-// Inicia a sessão para obter o professor logado
 session_start();
 
 // Verifica se o professor está logado
@@ -15,21 +14,25 @@ if (!isset($_SESSION['professor_id'])) {
     exit();
 }
 
-// O ID do professor logado
 $idProfessorLogado = $_SESSION['professor_id'];
 
+// Inicializa controlador de alunos
+$alunoController = new AlunoController();
+$alunos = $alunoController->consultarTodos(); // Certifique-se de que este método existe e retorna todos os alunos
+var_dump($aluno);
 if (isset($_POST['cadastrar'])) {
     try {
-        // Cria a turma com os dados fornecidos
         $turma = new Turma($_POST);
-        $turma->setIdProfessor($idProfessorLogado);  // Associa o professor logado
-        
+        $turma->setIdProfessor($idProfessorLogado);
+
         $turmaController = new TurmaController();
         $resultado = $turmaController->insertTurma($turma);
-        
+
         if ($resultado) {
-            // Após cadastrar a turma, associa os alunos à turma
-            $idTurma = $turmaController->getAlunos();
+            // Obtém o ID da turma inserida
+            $idTurma = $turmaController->getUltimaTurmaInserida(); // Certifique-se de implementar este método
+
+            // Adiciona alunos à turma, se selecionados
             if (isset($_POST['alunos'])) {
                 $turmaController->adicionarAlunosNaTurma($idTurma, $_POST['alunos']);
             }
@@ -42,10 +45,9 @@ if (isset($_POST['cadastrar'])) {
         echo "<div class='alert alert-danger'>Ocorreu um erro ao processar seu cadastro.</div>";
     }
 }
+?>
 
-// Carrega todos os alunos cadastrados
-$alunoController = new AlunoController();
-$alunos = $alunoController->getAlunos();
+
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +78,7 @@ $alunos = $alunoController->getAlunos();
                 <select id="alunos" name="alunos[]" class="form-select" multiple required>
                     <option value="">Selecione os alunos</option>
                     <?php
-                    // Exibe todos os alunos cadastrados
+
                     foreach ($alunos as $aluno) {
                         echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
                     }

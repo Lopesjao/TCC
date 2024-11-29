@@ -7,16 +7,25 @@ class AlunoTurma
     private $idTurma;   
 
    
-    public function __construct($dados = null)
+    public function __construct()
     {
-        if ($dados) {
-            $this->id = $dados['id'] ?? null;
-            $this->idAluno = $dados['id_aluno'] ?? null;
-            $this->idTurma = $dados['id_turma'] ?? null;
+        if (func_num_args() != 0) {
+            $atributos = func_get_args()[0];
+            foreach ($atributos as $atributo => $valor) {
+                if (isset($valor) && property_exists(get_class($this), $atributo)) {
+                    $this->$atributo = $valor;
+                }
+            }
         }
     }
-
-   
+    function atualizar($atributos)
+    {
+        foreach ($atributos as $atributo => $valor) {
+            if (isset($valor) && property_exists(get_class($this), $atributo)) {
+                $this->$atributo = $valor;
+            }
+        }
+    }
     public function getId()
     {
         return $this->id;

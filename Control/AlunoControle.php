@@ -26,20 +26,38 @@ class AlunoController
         return $pstmt;
     }
 
-    public function getAlunos() {
+    public function consultarPorNome($nome)
+    {
+        $pstmt = $this->conexao->prepare("SELECT * FROM aluno WHERE nome = :nome");
+        $pstmt->bindValue(':nome', $nome);
+        $pstmt->execute();
+    
+        // Retorna todos os registros encontrados
+        $resultados = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $resultados; // Retorna um array com os registros ou um array vazio se não encontrar
+    }
+    public function consultarTodos()
+{
+    $pstmt = $this->conexao->prepare("SELECT idAluno, nome FROM aluno");
+    $pstmt->execute();
+    return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+    public function getAlunos()
+    {
         $conn = Conexao::getConexao();
         $sql = "SELECT * FROM aluno";
-        $result = $conn->query($sql);
-        
-        $alunos = [];
-        while ($row = $result->fetch()) {
-            $alunos[] = $row;
-        }
-        
-        return $alunos;
+        $pstmt = $conn->prepare($sql);
+        $pstmt->execute();
+        //while($linha = $pstmt->fetch()){
+        return $pstmt;
+
+
     }
 
-//esse é meu metodo de verificar o login como n estou usando hash na senha acredito
+    //esse é meu metodo de verificar o login como n estou usando hash na senha acredito
 // que seria so verificar se é igual com o do banco
     public function selectAlunoVerificaLogin($email, $senha)
     {
@@ -47,22 +65,22 @@ class AlunoController
         $pstmt = $this->conexao->prepare("SELECT * FROM aluno WHERE email = ?");
         $pstmt->bindValue(1, $email);
         $pstmt->execute();
-    
+
         if ($pstmt->rowCount() > 0) {
             $aluno = $pstmt->fetch(PDO::FETCH_ASSOC);
             $aluno = new Aluno($aluno);
-            
+
             ////var_dump($aluno);
             //echo $aluno;
-       
+
             if ($senha == $aluno->getSenha()) {
                 $_SESSION["aluno"] = serialize($aluno);
-                return true; 
+                return true;
             } else {
-                return false; 
+                return false;
             }
         } else {
-            return false; 
+            return false;
         }
     }
     //aqui coloquei o seu login do seu sistema mas nao estou utilizando ele

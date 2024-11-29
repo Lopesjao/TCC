@@ -6,13 +6,13 @@ class TurmaController
 {
     private $conexao;
 
-    // Construtor que inicializa a conexão com o banco de dados
+    
     public function __construct()
     {
         $this->conexao = Conexao::getConexao();
     }
 
-    // Método para inserir uma nova turma
+   
     public function insertTurma(Turma $turma)
     {
         $pstmt = $this->conexao->prepare("INSERT INTO turma (nome, idProfessor) VALUES (?, ?)");
@@ -22,7 +22,7 @@ class TurmaController
         return $pstmt;
     }
 
-    // Método para adicionar alunos à turma
+
     public function adicionarAlunosNaTurma($idTurma, $alunos)
     {
         $pstmt = $this->conexao->prepare("INSERT INTO aluno_turma (idAluno, idTurma) VALUES (?, ?)");
@@ -33,16 +33,21 @@ class TurmaController
             $pstmt->execute();
         }
     }
-
-    // Método para buscar todos os alunos cadastrados
+    public function getUltimaTurmaInserida()
+    {
+        return $this->conexao->lastInsertId();
+    }
+    
+   
     public function getAlunos()
     {
-        $pstmt = $this->conexao->prepare("SELECT * FROM aluno");
+        $pstmt = $this->conexao->prepare("SELECT nome FROM aluno");
+      // $pstmt->bindValue(1, $idAluno);
         $pstmt->execute();
         return $pstmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Método para buscar todas as turmas de um professor
+
     public function getTurmasPorProfessor($idProfessor)
     {
         $pstmt = $this->conexao->prepare("SELECT * FROM turma WHERE idProfessor = ?");
