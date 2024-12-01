@@ -4,49 +4,45 @@ include_once __DIR__ . '/../Control/TurmaControle.php';
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
-require_once('Config.php');
 
+// Exemplo ao realizar login
 session_start();
-
-// Verifica se o professor está logado
-if (!isset($_SESSION['professor_id'])) {
-    header("Location: login.php");
-    exit();
+if(isset($_SESSION['idProfesso'])){
+$idProfessor = $_SESSION['idProfessor'];
+}else{
+    echo"erroooo";
 }
+//$idProfessorLogado = $_SESSION['idProfessor'];
 
-$idProfessorLogado = $_SESSION['professor_id'];
 
-// Inicializa controlador de alunos
 $alunoController = new AlunoController();
-$alunos = $alunoController->consultarTodos(); // Certifique-se de que este método existe e retorna todos os alunos
-var_dump($aluno);
+$alunos = $alunoController->consultarTodos();
+
+// Inicializa controlador de turmas
+$turmaController = new TurmaController();
+$turmas = $turmaController->getTurmasPorProfessor($idProfessor); // Obter turmas do professor logado
+
 if (isset($_POST['cadastrar'])) {
     try {
+        // Cria o objeto Turma a partir dos dados do formulário
         $turma = new Turma($_POST);
-        $turma->setIdProfessor($idProfessorLogado);
+        $turma->setIdProfessor($idProfessor); // Passa o ID do professor logado
 
-        $turmaController = new TurmaController();
-        $resultado = $turmaController->insertTurma($turma);
+        // Insere a turma no banco e pega o ID da nova turma
+        $idTurma = $turmaController->insertTurma($turma);
 
-        if ($resultado) {
-            // Obtém o ID da turma inserida
-            $idTurma = $turmaController->getUltimaTurmaInserida(); // Certifique-se de implementar este método
-
-            // Adiciona alunos à turma, se selecionados
-            if (isset($_POST['alunos'])) {
-                $turmaController->adicionarAlunosNaTurma($idTurma, $_POST['alunos']);
-            }
-            echo "<div class='alert alert-success'>Turma cadastrada e alunos adicionados com sucesso!</div>";
-        } else {
-            echo "<div class='alert alert-danger'>Erro ao cadastrar turma!</div>";
+        // Se houver alunos selecionados, associa-os à turma
+        if (isset($_POST['alunos'])) {
+            $alunosSelecionados = $_POST['alunos'];
+            $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
         }
+
+        echo "<div class='alert alert-success'>Turma cadastrada e alunos adicionados com sucesso!</div>";
     } catch (Exception $e) {
         error_log("Erro ao cadastrar turma: " . $e->getMessage());
         echo "<div class='alert alert-danger'>Ocorreu um erro ao processar seu cadastro.</div>";
     }
 }
-?>
-
 
 ?>
 
@@ -73,12 +69,25 @@ if (isset($_POST['cadastrar'])) {
                 <input type="text" id="nome" name="nome" class="form-control" required>
             </div>
 
+            <!-- Exibir turmas existentes para o professor -->
+            <div class="mb-3">
+                <label for="turma_existente" class="form-label">Selecione uma Turma Existente:</label>
+                <select id="turma_existente" name="turma_existente" class="form-select">
+                    <option value="">Selecione uma turma (opcional)</option>
+                    <?php
+                    foreach ($turmas as $turma) {
+                        echo "<option value='{$turma['idTurma']}'>{$turma['nome']}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+
+            <!-- Seleção de alunos -->
             <div class="mb-3">
                 <label for="alunos" class="form-label">Selecione os Alunos:</label>
                 <select id="alunos" name="alunos[]" class="form-select" multiple required>
                     <option value="">Selecione os alunos</option>
                     <?php
-
                     foreach ($alunos as $aluno) {
                         echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
                     }

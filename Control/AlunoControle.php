@@ -37,6 +37,84 @@ class AlunoController
     
         return $resultados; // Retorna um array com os registros ou um array vazio se não encontrar
     }
+    public function getAlunoById($conn, $idAluno)
+    {
+        try {
+            $pstmt = $conn->prepare("SELECT * FROM aluno WHERE idAluno = ?");
+            $pstmt->bindValue(1, $idAluno);
+            $pstmt->execute();
+            $result = $pstmt->fetch(PDO::FETCH_ASSOC);
+            return new Aluno($result);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+    public function getAlunoByNome($conn, $nome)
+    {
+        try {
+            $pstmt = $conn->prepare("SELECT * FROM aluno WHERE nome = ?");
+            $pstmt->bindValue(1, $nome);
+            $pstmt->execute();
+            $result = $pstmt->fetch(PDO::FETCH_ASSOC);
+            return new Aluno($result);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    // CRUD - Update
+    public function updateAluno($aluno)
+    {
+        try {
+            $pstmt = $aluno->prepare("UPDATE aluno SET nome = ?, email = ?, matricula = ?, dataNasc = ?, senha = ? WHERE idAluno = ?");
+            $pstmt->bindValue(1, $aluno->getNome());
+            $pstmt->bindValue(2, $aluno->getEmail());
+            $pstmt->bindValue(3, $aluno->getMatricula());
+            $pstmt->bindValue(4, $aluno->getDataNasc());
+            $pstmt->bindValue(5, $aluno->getSenha());
+            $pstmt->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    // CRUD - Delete
+    public function deleteAluno($conn)
+    {
+        try {
+            $pstmt = $conn->prepare("DELETE FROM aluno WHERE idAluno = ?");
+            $pstmt->bindValue(1, $conn->getNome());
+            $pstmt->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    // Método para listar alunos de uma turma específica
+    public function getAlunosPorTurma($conn, $idTurma)
+    {
+        try {
+            $pstmt = $conn->prepare("SELECT a.idAluno, a.nome, a.email FROM aluno a 
+                                     JOIN turma_aluno ta ON a.idAluno = ta.idAluno
+                                     WHERE ta.idTurma = ?");
+            $pstmt->bindValue(1, $idTurma);
+            $pstmt->execute();
+            $resultados = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados; // Retorna uma lista de alunos dessa turma
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return [];
+        }
+    }
+
+
+
     public function consultarTodos()
 {
     $pstmt = $this->conexao->prepare("SELECT idAluno, nome FROM aluno");
