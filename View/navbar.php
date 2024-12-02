@@ -61,7 +61,7 @@ if (!isset($_SESSION)) {
                         //echo "é professor";
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="turma.php">Turma</a>
+                            <a class="nav-link" href="Alunos.php">Turma</a>
                         </li>
                         <?php
                     }

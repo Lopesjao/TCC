@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    
+
     include_once __DIR__ . '/../Control/AlunoControle.php';
     include_once __DIR__ . '/../Control/ProfessorControle.php';
     $alunoController = new AlunoController();
@@ -24,24 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //var_dump($aluno);
         $_SESSION['usuario_sessao'] = $aluno->getEmail();
         $_SESSION['tipo'] = "aluno";
-        
-        header('Location: Home.php'); 
+
+        header('Location: Home.php');
         exit();
-    } elseif ($resultado2){
+    } elseif ($resultado2) {
         session_regenerate_id();
         $prof = new Professor(unserialize($_SESSION["professor"]));
         //var_dump($aluno);
         $_SESSION['usuario_sessao'] = $prof->getEmail();
         $_SESSION['tipo'] = "prof";
-        
-        header('Location: Home.php'); 
+
+        header('Location: Home.php');
         exit();
-    }else{
+    } else {
         echo "Erro ao realizar login!";
     }
 
- 
-    
+
+
 }
 ?>
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
             <h2 class="text-center mb-4">Login</h2>
-            
+
             <form action="login.php" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email:</label>
@@ -84,18 +84,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="oauth2callback.php" class="g-signin2" data-theme="dark" data-width="370" data-height="50">
                     <span class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 488 512">
-                            <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+                            <path
+                                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
                         </svg>
                     </span>
                     Login com Google
                 </a>
             </div>
+           
+                <!-- Logo no centro -->
+
+
+                <!-- Botões de Login/Cadastro -->
+                <p>Sou Aluno:</p>
+                <a class="btn btn-primary btn-lg btn-space" href="CadastroAluno.php" role="button">Cadastro</a>
+
+                <p class="btn-space">Sou Professor:</p>
+                <a class="btn btn-secondary btn-lg btn-space" href="CadastroProfessor.php" role="button">Cadastro</a>
+            </div>
+
+
+
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <footer>  <?php require_once "footer.php"; ?></footer>
+
+    <footer> <?php require_once "footer.php"; ?></footer>
 </body>
 
 </html>

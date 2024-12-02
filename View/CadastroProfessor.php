@@ -13,15 +13,19 @@ if (isset($_POST['cadastrar'])) {
 
     if ($resultado) {
 
-        echo "Professor cadastrado com sucesso!";
+         echo "<div class='alert alert-success'>Professor cadastrado com sucesso!</div>";
+        header("Location: login.php");
     } else {
-        echo "Erro ao cadastrar professor!";
+        echo "<div class='alert alert-danger'>Erro ao cadastrar professor!</div>";
+        header("CadastroProfessor.php");
     }
 }
 
 ?>
 <script>
-    alert("cadastrado com sucesso");
+
+   
+ 
 </script>
 
 <!DOCTYPE html>

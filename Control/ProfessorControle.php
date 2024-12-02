@@ -44,7 +44,7 @@ class ProfessorController
             //echo $professor;
        
             if ($senha == $professor->getSenha()) {
-                $_SESSION["$professor"] = serialize($professor);
+                $_SESSION["professor"] = serialize($professor);
                 return true; 
             } else {
                 return false; 

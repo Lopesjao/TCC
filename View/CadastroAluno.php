@@ -17,6 +17,7 @@ if (isset($_POST['cadastrar'])) {
 
         if ($resultado) {
             echo "<div class='alert alert-success'>Aluno cadastrado com sucesso!</div>";
+           // $alunoController->consultarPorNome($resultado);
         } else {
             echo "<div class='alert alert-danger'>Erro ao cadastrar aluno!</div>";
         }

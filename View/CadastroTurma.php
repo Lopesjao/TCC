@@ -4,34 +4,48 @@ include_once __DIR__ . '/../Control/TurmaControle.php';
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
+include_once __DIR__ . '/../Model/Professor.php';
+include_once __DIR__ . '/../Control/ProfessorControle.php';
 
-// Exemplo ao realizar login
+
 session_start();
-if(isset($_SESSION['idProfesso'])){
-$idProfessor = $_SESSION['idProfessor'];
-}else{
-    echo"erroooo";
+
+session_regenerate_id();
+
+if (!isset($_SESSION['idProfessor'])) {
+    $prof = new Professor(unserialize($_SESSION["professor"]));
+    $_SESSION['idProfessor'] = $prof->getidProfessor();
+   // var_dump($_SESSION['idProfessor']);
+    echo "oi";
+  // $idProfessor = $_SESSION['idProfessor'];
+} else {
+    echo "erroooo";
 }
+
+
+
+
+
+
 //$idProfessorLogado = $_SESSION['idProfessor'];
 
 
 $alunoController = new AlunoController();
 $alunos = $alunoController->consultarTodos();
 
-// Inicializa controlador de turmas
+
 $turmaController = new TurmaController();
-$turmas = $turmaController->getTurmasPorProfessor($idProfessor); // Obter turmas do professor logado
+$turmas = $turmaController->getTurmasPorProfessor($prof);
 
 if (isset($_POST['cadastrar'])) {
     try {
-        // Cria o objeto Turma a partir dos dados do formulário
-        $turma = new Turma($_POST);
-        $turma->setIdProfessor($idProfessor); // Passa o ID do professor logado
 
-        // Insere a turma no banco e pega o ID da nova turma
+        $turma = new Turma($_POST);
+        $turma->setIdProfessor($prof);
+
         $idTurma = $turmaController->insertTurma($turma);
 
-        // Se houver alunos selecionados, associa-os à turma
+
         if (isset($_POST['alunos'])) {
             $alunosSelecionados = $_POST['alunos'];
             $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
@@ -69,7 +83,7 @@ if (isset($_POST['cadastrar'])) {
                 <input type="text" id="nome" name="nome" class="form-control" required>
             </div>
 
-            <!-- Exibir turmas existentes para o professor -->
+
             <div class="mb-3">
                 <label for="turma_existente" class="form-label">Selecione uma Turma Existente:</label>
                 <select id="turma_existente" name="turma_existente" class="form-select">
@@ -82,7 +96,7 @@ if (isset($_POST['cadastrar'])) {
                 </select>
             </div>
 
-            <!-- Seleção de alunos -->
+
             <div class="mb-3">
                 <label for="alunos" class="form-label">Selecione os Alunos:</label>
                 <select id="alunos" name="alunos[]" class="form-select" multiple required>

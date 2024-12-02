@@ -6,13 +6,13 @@ class TurmaController
 {
     private $conexao;
 
-    
+
     public function __construct()
     {
         $this->conexao = Conexao::getConexao();
     }
 
-   
+
     public function insertTurma(Turma $turma)
     {
         $pstmt = $this->conexao->prepare("INSERT INTO turma (nome, idProfessor) VALUES (?, ?)");
@@ -37,12 +37,26 @@ class TurmaController
     {
         return $this->conexao->lastInsertId();
     }
-    
-   
+    public function getAlunosDaTurma($idTurma)
+    {
+        try {
+            $pstmt = $this->conexao->prepare("SELECT a.* FROM aluno a
+                                              JOIN aluno_turma at ON a.idAluno = at.idAluno
+                                              WHERE at.idTurma = ?");
+            $pstmt->bindValue(1, $idTurma);
+            $pstmt->execute();
+            return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro ao buscar alunos: " . $e->getMessage();
+            return [];
+        }
+    }
+
+
     public function getAlunos()
     {
         $pstmt = $this->conexao->prepare("SELECT nome FROM aluno");
-      // $pstmt->bindValue(1, $idAluno);
+        // $pstmt->bindValue(1, $idAluno);
         $pstmt->execute();
         return $pstmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -56,15 +70,14 @@ class TurmaController
         return $pstmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Método para buscar alunos de uma turma específica
-    public function getAlunosDaTurma($idTurma)
+  
+    public function removerAlunoDaTurma($idAluno, $idTurma)
     {
-        $pstmt = $this->conexao->prepare("SELECT a.* FROM aluno a
-                                          JOIN aluno_turma at ON a.idAluno = at.idAluno
-                                          WHERE at.idTurma = ?");
-        $pstmt->bindValue(1, $idTurma);
-        $pstmt->execute();
-        return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+        $pstmt = $this->conexao->prepare("DELETE FROM aluno_turma WHERE idAluno = ? AND idTurma = ?");
+        $pstmt->bindValue(1, $idAluno);
+        $pstmt->bindValue(2, $idTurma);
+        return $pstmt->execute();
     }
+
 }
 ?>

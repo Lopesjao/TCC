@@ -25,18 +25,77 @@ class AlunoController
         //var_dump($aluno);
         return $pstmt;
     }
-
+    function listarFuncionariosNoCombo(){
+		// Cria o comboBox, para exibir os nomes
+		echo '<center><form name="menu" method="post" action="consultar.php">
+		<select name="combo">
+		<option value="0" selected>(selecione um nome:)</option>';
+		
+		// Cria a conex�o com o Banco de Dados;
+		$conexao = conectar("agenda", "root", "");
+		// Cria o comando SQL a ser executado.
+		$sql = "SELECT nome FROM aluno order by nome";
+		// Cria um Prepared Statement com o comando SQL anterior.
+		$pstmt = $conexao->prepare($sql);
+		// Executa o comando.
+		$pstmt->execute();
+		// Resgata todas as linhas de resultados da consulta e preenche o combo.
+		while($linha = $pstmt->fetch()) {
+			echo '<option value="'.$linha["nome"].'">'.$linha["nome"].'</option>';
+		}
+		// Encerra a conex�o.
+		$conexao = encerrar();
+		
+		// Fecha o comboBox
+		echo '</select> <input type="submit" value="Consultar"></form></center>';
+	}
     public function consultarPorNome($nome)
     {
         $pstmt = $this->conexao->prepare("SELECT * FROM aluno WHERE nome = :nome");
         $pstmt->bindValue(':nome', $nome);
         $pstmt->execute();
+        echo "<h2>Registro encontrado com sucesso: </h2>";
+		echo "<center><table border=1><tr><th>ID</th><th>Nome</th><th>Email</th><th>Matricula</th><th>DataNasc</th></tr>";
+		while($linha = $pstmt->fetch()) {
+			echo "<tr>";
+			echo "<td>" . $linha["id"] . "</td>";
+			echo "<td>" . $linha["nome"] . "</td>";
+			echo "<td>" . $linha["email"] . "</td>";
+			echo "<td>" . $linha["matricula"] . "</td>";
+            echo "<td>" . $linha["dataNasc"] . "</td>";
+			echo "</tr>";
+		}
+		echo "</table></center><br>";
+	
+		$pstmt = encerrar();
     
         // Retorna todos os registros encontrados
-        $resultados = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+      //  $resultados = $pstmt->fetchAll(PDO::FETCH_ASSOC);
     
-        return $resultados; // Retorna um array com os registros ou um array vazio se não encontrar
+      //  return $resultados; 
     }
+    function consultarNome($nome){
+		$conexao = conectar("bdinfoquest", "root", "");
+		$sql = "SELECT * FROM aluno where nome = :nome";
+		$pstmt = $conexao->prepare($sql);
+		$pstmt->bindValue(":nome", $nome);
+		$pstmt->execute();
+	
+		echo "<h2>Registro encontrado com sucesso: </h2>";
+		echo "<center><table border=1><tr><th>ID</th><th>Nome</th><th>Email</th><th>Matricula</th><th>DataNasc</th></tr>";
+		while($linha = $pstmt->fetch()) {
+			echo "<tr>";
+			echo "<td>" . $linha["id"] . "</td>";
+			echo "<td>" . $linha["nome"] . "</td>";
+			echo "<td>" . $linha["email"] . "</td>";
+			echo "<td>" . $linha["matricula"] . "</td>";
+            echo "<td>" . $linha["dataNasc"] . "</td>";
+			echo "</tr>";
+		}
+		echo "</table></center><br>";
+	
+		$conexao = encerrar();
+	}
     public function getAlunoById($conn, $idAluno)
     {
         try {
@@ -64,7 +123,7 @@ class AlunoController
         }
     }
 
-    // CRUD - Update
+    //  Update
     public function updateAluno($aluno)
     {
         try {
@@ -82,7 +141,7 @@ class AlunoController
         return true;
     }
 
-    // CRUD - Delete
+    //  Delete
     public function deleteAluno($conn)
     {
         try {
@@ -117,7 +176,7 @@ class AlunoController
 
     public function consultarTodos()
 {
-    $pstmt = $this->conexao->prepare("SELECT idAluno, nome FROM aluno");
+    $pstmt = $this->conexao->prepare("SELECT nome FROM aluno");
     $pstmt->execute();
     return $pstmt->fetchAll(PDO::FETCH_ASSOC);
 }
