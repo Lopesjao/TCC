@@ -64,6 +64,7 @@ $alunos = $alunoController->consultarTodos();
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Matricula</th>
+                    <th>Data Nasc</th>
                     <th>Turmas</th>
                     <th>Ações</th>
                 </tr>
@@ -79,6 +80,7 @@ $alunos = $alunoController->consultarTodos();
                         <td><?php echo $aluno['idAluno']; ?></td>
                         <td><?php echo $aluno['nome']; ?></td>
                         <td><?php echo $aluno['matricula']; ?></td>
+                        <td><?php echo $aluno['dataNasc']; ?></td>                        
                         <td><?php echo $turmasAssociadas; ?></td>
                         <td>
                             <!-- Adicionar ou Remover aluno da turma -->
