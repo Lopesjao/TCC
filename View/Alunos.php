@@ -70,19 +70,9 @@ $alunos = $alunoController->consultarTodos();
             </thead>
             <tbody>
                 <?php
+                  foreach ($alunos as $aluno) {
+                    echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
                 
-                foreach ($alunos as $aluno) {
-                    $alunos = $alunoController->consultarPorNome($aluno);
-
-                    // $turmas = $turmaController->getAlunosDaTurma($aluno['idAluno']);
-                    // var_dump($turmas);
-                    //var_dump($turmasAssociadas);
-                
-                  /*  $turmasAssociadas = implode(", ", array_map(function ($turma) {
-                        return $turma['Nome'];
-                    }, $turmas));
-                    
-                    */
                     
                     ?>
                     <tr>
