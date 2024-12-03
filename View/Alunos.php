@@ -71,26 +71,34 @@ $alunos = $alunoController->consultarTodos();
             </thead>
             <tbody>
                 <?php
-                  foreach ($alunos as $aluno) {
+
+                if (isset($_POST['search'])) {
+                    $op = $_POST['search'];
+                    if ($op != "0") {
+                       
+                        $aluno->getAlunoByNome();
+                    }
+                }
+                foreach ($alunos as $aluno) {
                     echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
-                
-                    
-                    ?>
+
+
+                ?>
                     <tr>
                         <td><?php echo $aluno['idAluno']; ?></td>
                         <td><?php echo $aluno['nome']; ?></td>
                         <td><?php echo $aluno['matricula']; ?></td>
-                        <td><?php echo $aluno['dataNasc']; ?></td>                        
+                        <td><?php echo $aluno['dataNasc']; ?></td>
                         <td><?php echo $turmasAssociadas; ?></td>
                         <td>
                             <!-- Adicionar ou Remover aluno da turma -->
-                            <form method="POST" action="pagina_de_alunos.php" class="d-inline">
+                            <form method="POST" action="Alunos.php" class="d-inline">
                                 <input type="hidden" name="aluno_id" value="<?php echo $aluno['idAluno']; ?>">
                                 <select name="turma_id" class="form-select d-inline" required>
                                     <option value="">Selecione a turma</option>
                                     <?php
                                     // Listar todas as turmas
-                                    $turmasDisponiveis = $turmaController->getAlunos();
+                                    $turmasDisponiveis = $turmaController->getAlunosDaTurma($turma);
                                     foreach ($turmasDisponiveis as $turma) {
                                         echo "<option value='{$turma['IDTurma']}'>{$turma['Nome']}</option>";
                                     }
@@ -98,7 +106,7 @@ $alunos = $alunoController->consultarTodos();
                                 </select>
                                 <button type="submit" name="adicionar" class="btn btn-success btn-sm">Adicionar</button>
                             </form>
-                            <form method="POST" action="pagina_de_alunos.php" class="d-inline">
+                            <form method="POST" action="Alunos.php" class="d-inline">
                                 <input type="hidden" name="aluno_id" value="<?php echo $aluno['idAluno']; ?>">
                                 <select name="turma_id" class="form-select d-inline" required>
                                     <option value="">Selecione a turma</option>
