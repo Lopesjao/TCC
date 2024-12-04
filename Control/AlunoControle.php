@@ -176,7 +176,7 @@ class AlunoController
 
     public function consultarTodos()
 {
-    $pstmt = $this->conexao->prepare("SELECT * FROM aluno");
+    $pstmt = $this->conexao->prepare("SELECT nome, matricula FROM aluno");
     $pstmt->execute();
     return $pstmt->fetchAll(PDO::FETCH_ASSOC);
 }

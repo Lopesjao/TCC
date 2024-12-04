@@ -64,7 +64,15 @@ class TurmaController
 
     public function getTurmasPorProfessor($idProfessor)
     {
-        $pstmt = $this->conexao->prepare("SELECT * FROM turma WHERE idProfessor = ?");
+        $pstmt = $this->conexao->prepare("SELECT nome FROM turma WHERE idProfessor = ?");
+        $pstmt->bindValue(1, $idProfessor);
+        $pstmt->execute();
+        return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTurmas($idProfessor)
+    {
+        $pstmt = $this->conexao->prepare("SELECT nome FROM turma");
         $pstmt->bindValue(1, $idProfessor);
         $pstmt->execute();
         return $pstmt->fetchAll(PDO::FETCH_ASSOC);

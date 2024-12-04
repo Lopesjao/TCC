@@ -7,17 +7,24 @@ include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
 include_once __DIR__ . '/../Model/Professor.php';
 include_once __DIR__ . '/../Control/ProfessorControle.php';
 
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-session_start();
 
 session_regenerate_id();
 
 if (!isset($_SESSION['idProfessor'])) {
     $prof = new Professor(unserialize($_SESSION["professor"]));
     $_SESSION['idProfessor'] = $prof->getidProfessor();
-   // var_dump($_SESSION['idProfessor']);
+   // var_dump($_SESSION);
+    $prof = new Professor(unserialize($_SESSION["professor"]));
+    //var_dump($aluno);
+    $_SESSION['usuario_sessao'] = $prof->getEmail();
+    var_dump($prof->getEmail(),"@gmail");
+
     echo "oi";
-  // $idProfessor = $_SESSION['idProfessor'];
+    // $idProfessor = $_SESSION['idProfessor'];
 } else {
     echo "erroooo";
 }
@@ -80,7 +87,7 @@ if (isset($_POST['cadastrar'])) {
         <form action="CadastroTurma.php" method="POST" class="mt-4">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome da Turma:</label>
-                <input type="text" id="nome" name="nome" class="form-control" required>
+                <input type="text" id="nome" name="nome" class="form-control">
             </div>
 
 
@@ -104,6 +111,7 @@ if (isset($_POST['cadastrar'])) {
                     <?php
                     foreach ($alunos as $aluno) {
                         echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
+                        echo "<option value='{$aluno['idAluno']}'>{$aluno['matricula']}</option>";
                     }
                     ?>
                 </select>
