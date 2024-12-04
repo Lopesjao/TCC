@@ -1,4 +1,21 @@
 <?php
+
+/*if (!isset($_SESSION)) {
+  
+    // var_dump($_SESSION);
+    echo "entrou ";
+   
+}*/
+
+
+if (!isset($_SESSION)) {
+    session_start();
+    // var_dump($_SESSION);
+//    echo "entrou ";
+   
+}
+$resultado = true;
+
 include_once __DIR__ . '/../Model/Turma.php';
 include_once __DIR__ . '/../Control/TurmaControle.php';
 include_once __DIR__ . '/../Model/Aluno.php';
@@ -7,27 +24,39 @@ include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
 include_once __DIR__ . '/../Model/Professor.php';
 include_once __DIR__ . '/../Control/ProfessorControle.php';
 
-if (!isset($_SESSION)) {
-    session_start();
+
+if ($resultado) {
+    session_regenerate_id();
+    $prof = new Professor(unserialize($_SESSION["Professor"]));
+    //var_dump($aluno);
+    $_SESSION['usuario_sessao'] = $prof->getidProfessor();
+    $_SESSION['tipo'] = "prof";
+    echo "prof entrou";
+    echo $prof;
+    echo $_SESSION['usuario_sessao'];
+    // header('Location: Home.php');
+    //  exit();
 }
 
+/*if (!isset($_SESSION['idProfessor'])) {
+    session_regenerate_id();
+    $prof = new Professor(unserialize($_SESSION["Professor"]));
+   // var_dump($prof);
+    $_SESSION['usuario_sesao'] = $prof->getidProfessor();
+    $_SESSION['usuario_sesao'] = $prof->getNome();
+    echo "nome: ", $prof->getNome();
 
-session_regenerate_id();
-
-if (!isset($_SESSION['idProfessor'])) {
-    $prof = new Professor(unserialize($_SESSION["professor"]));
-    $_SESSION['idProfessor'] = $prof->getidProfessor();
    // var_dump($_SESSION);
-    $prof = new Professor(unserialize($_SESSION["professor"]));
+ //   $prof = new Professor(unserialize($_SESSION["professor"]));
     //var_dump($aluno);
-    $_SESSION['usuario_sessao'] = $prof->getEmail();
-    var_dump($prof->getEmail(),"@gmail");
+ ////   $_SESSION['usuario_sessao'] = $prof->getEmail();
+   //var_dump($prof->getNome(),"nome prof");
 
-    echo "oi";
+    echo "entrou prof e";
     // $idProfessor = $_SESSION['idProfessor'];
 } else {
     echo "erroooo";
-}
+}*/
 
 
 
@@ -42,7 +71,7 @@ $alunos = $alunoController->consultarTodos();
 
 
 $turmaController = new TurmaController();
-$turmas = $turmaController->getTurmasPorProfessor($prof);
+$turmas = $turmaController->getTurmas($prof);
 
 if (isset($_POST['cadastrar'])) {
     try {
@@ -51,11 +80,12 @@ if (isset($_POST['cadastrar'])) {
         $turma->setIdProfessor($prof);
 
         $idTurma = $turmaController->insertTurma($turma);
-
+        var_dump($idTurma);
 
         if (isset($_POST['alunos'])) {
             $alunosSelecionados = $_POST['alunos'];
             $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
+            // $turmaController->insertTurma($aluno);
         }
 
         echo "<div class='alert alert-success'>Turma cadastrada e alunos adicionados com sucesso!</div>";

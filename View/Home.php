@@ -11,6 +11,7 @@ session_start();
 
 if(isset($_SESSION['tipo']) && ($_SESSION['tipo'])=="prof"){
     echo "é professor";
+    var_dump($_SESSION);
 
   }else{
     if(isset($_SESSION['tipo']) && ($_SESSION['tipo'])==""){

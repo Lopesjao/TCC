@@ -1,4 +1,10 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+    // var_dump($_SESSION);
+//    echo "entrou ";
+   
+}
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Conexao/ConexaoConfig.php';

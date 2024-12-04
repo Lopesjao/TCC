@@ -1,8 +1,19 @@
 <?php
+
+
+if (!isset($_SESSION)) {
+    session_start();
+    // var_dump($_SESSION);
+//    echo "entrou ";
+   
+}
+
+
+
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Model/Professor.php';
 
-session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
