@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
     session_start();
     // var_dump($_SESSION);
 //    echo "entrou ";
-   
+
 }
 $resultado = true;
 
@@ -27,7 +27,7 @@ include_once __DIR__ . '/../Control/ProfessorControle.php';
 
 if ($resultado) {
     session_regenerate_id();
-    $prof = new Professor(unserialize($_SESSION["Professor"]));
+    $prof = new Professor(unserialize($_SESSION["professor"]));
     //var_dump($aluno);
     $_SESSION['usuario_sessao'] = $prof->getidProfessor();
     $_SESSION['tipo'] = "prof";
@@ -77,10 +77,12 @@ if (isset($_POST['cadastrar'])) {
     try {
 
         $turma = new Turma($_POST);
-        $turma->setIdProfessor($prof);
+        $turma->setIdProfessor($prof->getidProfessor());
+        //  $turma->__toString();
+
 
         $idTurma = $turmaController->insertTurma($turma);
-        var_dump($idTurma);
+        //  var_dump($idTurma);
 
         if (isset($_POST['alunos'])) {
             $alunosSelecionados = $_POST['alunos'];
@@ -90,6 +92,7 @@ if (isset($_POST['cadastrar'])) {
 
         echo "<div class='alert alert-success'>Turma cadastrada e alunos adicionados com sucesso!</div>";
     } catch (Exception $e) {
+        echo $e->getMessage();
         error_log("Erro ao cadastrar turma: " . $e->getMessage());
         echo "<div class='alert alert-danger'>Ocorreu um erro ao processar seu cadastro.</div>";
     }

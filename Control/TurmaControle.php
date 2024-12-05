@@ -18,6 +18,7 @@ class TurmaController
         $pstmt = $this->conexao->prepare("INSERT INTO turma (nome, idProfessor) VALUES (?, ?)");
         $pstmt->bindValue(1, $turma->getNome());
         $pstmt->bindValue(2, $turma->getIdProfessor());
+       // echo "ID PROFESSOR::::",$turma->getIdProfessor();
         $pstmt->execute();
         return $pstmt;
     }
