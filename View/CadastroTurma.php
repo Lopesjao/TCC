@@ -44,6 +44,7 @@ $alunos = $alunoController->consultarTodos();
 $turmaController = new TurmaController();
 $turmas = $turmaController->getTurmasPorProfessor($prof);
 
+
 if (isset($_POST['cadastrar'])) {
     try {
 
