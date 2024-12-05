@@ -38,7 +38,7 @@ class ProfessorController
     
         if ($pstmt->rowCount() > 0) {
             $professor = $pstmt->fetch(PDO::FETCH_ASSOC);
-            $professor = new Aluno($professor);
+            $professor = new Professor($professor);
             
             ////var_dump($professor);
             //echo $professor;

@@ -17,13 +17,16 @@ if (!isset($_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .custom-navbar {
             background-color: #2D55AD;
-            /* Cor personalizada */
+            color: white;
         }
-       
+        .custom-nav-item{
+            color: whitesmoke !important;
+background-color:beige !important;;
+        }
     </style>
 </head>
 
@@ -82,7 +85,7 @@ if (!isset($_SESSION)) {
                         <li class="nav-item">
                             <a class="btn btn-primary" href="login.php" role="button">Login</a>
                         </li>
-                    <?php
+                        <?php
                     }
                     ?>
                     <li class="nav-item">
@@ -93,9 +96,9 @@ if (!isset($_SESSION)) {
         </div>
 
     </nav>
-   
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

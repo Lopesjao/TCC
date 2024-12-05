@@ -15,8 +15,10 @@ if (!isset($_SESSION)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .custom-footer {
-            background-color: #2D55AD;
+            width: 100%;
             color: white;
+            background-color: #2D55AD;
+            height: 80% !important;
             padding: 20px 0;
         }
 

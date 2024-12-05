@@ -1,8 +1,19 @@
 <?php
+
+
+if (!isset($_SESSION)) {
+    session_start();
+    // var_dump($_SESSION);
+//    echo "entrou ";
+   
+}
+
+
+
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Model/Professor.php';
 
-session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -31,10 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_regenerate_id();
         $prof = new Professor(unserialize($_SESSION["professor"]));
         //var_dump($aluno);
+      //  $_SESSION['prof'] = serialize($prof); //objeto prof
         $_SESSION['usuario_sessao'] = $prof->getEmail();
         $_SESSION['tipo'] = "prof";
+       // echo $prof;
 
-        header('Location: Home.php');
+       header('Location: Home.php');
         exit();
     } else {
         echo "Erro ao realizar login!";
