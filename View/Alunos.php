@@ -76,7 +76,7 @@ $alunos = $alunoController->consultarPorNome();
                     $op = $_POST['search'];
                     if ($op != "0") {
                        
-                        $aluno->;
+                     //   $aluno->;teste 
                     }
                 }
                 foreach ($alunos as $aluno) {
@@ -90,6 +90,8 @@ $alunos = $alunoController->consultarPorNome();
                         <td><?php echo $aluno['matricula']; ?></td>
                         <td><?php echo $aluno['dataNasc']; ?></td>
                         <td><?php echo $turmasAssociadas; ?></td>
+                        <td><?php echo $turmasAssociadas; ?></td>
+                        
                         <td>
                             <!-- Adicionar ou Remover aluno da turma -->
                             <form method="POST" action="Alunos.php" class="d-inline">
