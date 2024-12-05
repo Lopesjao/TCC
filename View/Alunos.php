@@ -27,7 +27,7 @@ if (isset($_POST['remover'])) {
 
 
 $alunos = $alunoController->consultarTodos();
-//$alunos = $alunoController->consultarPorNome();
+$alunos = $alunoController->consultarPorNome();
 //var_dump($alunos);
 //var_dump($alunoController);
 //var_dump($alunoController->consultarTodos());
@@ -76,7 +76,7 @@ $alunos = $alunoController->consultarTodos();
                     $op = $_POST['search'];
                     if ($op != "0") {
                        
-                        $aluno->getAlunoByNome();
+                        $aluno->;
                     }
                 }
                 foreach ($alunos as $aluno) {
