@@ -73,6 +73,7 @@ $alunos = $alunoController->consultarTodos();
 $turmaController = new TurmaController();
 $turmas = $turmaController->getTurmas($prof);
 
+
 if (isset($_POST['cadastrar'])) {
     try {
 
