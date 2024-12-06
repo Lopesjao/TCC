@@ -26,20 +26,19 @@ class TurmaController
 
     public function adicionarAlunosNaTurma($idTurma, $alunosSelecionados) {
         try {
-            // Prepare a consulta SQL
+            
             $sql = "INSERT INTO aluno_turma (idTurma, idAluno) VALUES (:idTurma, :idAluno)";
             $stmt = $this->conexao->prepare($sql);
     
-            // Percorra os alunos selecionados e insira-os na tabela de relacionamento
             foreach ($alunosSelecionados as $alunoId) {
-                // Bind os valores de ID da turma e ID do aluno corretamente
+          
                 $stmt->bindValue(':idTurma', $idTurma, PDO::PARAM_INT);
                 $stmt->bindValue(':idAluno', $alunoId, PDO::PARAM_INT);
-                $stmt->execute();  // Execute a inserção
+                $stmt->execute();  
             }
     
         } catch (Exception $e) {
-            // Logar erro, caso ocorra algum problema
+         
             error_log("Erro ao adicionar alunos na turma: " . $e->getMessage());
             throw new Exception("Erro ao adicionar alunos na turma.");
         }

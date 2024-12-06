@@ -106,7 +106,7 @@ function selecionarQuestoesAleatorias() {
         { option: "Verificar se o cabo está conectado corretamente", resposta: true },
         { option: "Limpar o cache do navegador", resposta: false },
         { option: "Ajustar a configuração de idioma no painel de controle", resposta: false },
-      ],
+      ], 
     },
     {
       pergunta: "O que pode ser feito se o computador não inicializa o sistema operacional?",

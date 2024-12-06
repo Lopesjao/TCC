@@ -15,10 +15,10 @@ if (!isset($_SESSION)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .custom-footer {
-            width: 100%;
+
             color: white;
             background-color: #2D55AD;
-            height: auto !important;
+
             padding: 20px 0;
         }
 
@@ -58,7 +58,7 @@ if (!isset($_SESSION)) {
 
                 </div>
             </div>
-            <hr class="my-3" style="border-color: rgba(255, 255, 255, 0.3);">
+        
             <p>&copy; <?php echo date("Y"); ?> João Manoel C. Lopes. Todos os direitos reservados.</p>
         </div>
     </footer>
