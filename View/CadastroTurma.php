@@ -11,7 +11,7 @@
 if (!isset($_SESSION)) {
     session_start();
     // var_dump($_SESSION);
-//    echo "entrou ";
+    //    echo "entrou ";
 
 }
 $resultado = true;
@@ -84,19 +84,17 @@ if (isset($_POST['cadastrar'])) {
         $idTurma = $turmaController->insertTurma($turma);
         //  var_dump($idTurma);
 
-         if (isset($_POST['alunos'])) {
-             $alunosSelecionados = $_POST['alunos'];
-             echo "alunos selcionados".var_dump($alunosSelecionados). "FIMMMM";
-             $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
-         //    var_dump($turma);
-             // $turmaController->insertTurma($aluno);
-         }
+        if (isset($_POST['alunos']) && !empty($_POST['alunos'])) {
+            $alunosSelecionados = $_POST['alunos'];
+         //  echo" alunos AQUI::::". var_dump($alunosSelecionados);  // Verifique o conteúdo de $alunosSelecionados
+         //   var_dump($idTurma);
+            $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
+        }
 
         echo "<div class='alert alert-success'>Turma cadastrada e alunos adicionados com sucesso!</div>";
     } catch (Exception $e) {
-        echo $e->getMessage();
         error_log("Erro ao cadastrar turma: " . $e->getMessage());
-        echo "<div class='alert alert-danger'>Ocorreu um erro ao processar seu cadastro.</div>";
+        echo "<div class='alert alert-danger'>Erro ao cadastrar turma: " . $e->getMessage() . "</div>";
     }
 }
 
@@ -167,11 +165,11 @@ if (isset($_POST['cadastrar'])) {
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#alunos').select2({
                 placeholder: "Selecione os alunos",
                 allowClear: true,
-                
+
             });
         });
     </script>

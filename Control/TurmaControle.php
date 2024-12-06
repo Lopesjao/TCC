@@ -24,21 +24,27 @@ class TurmaController
     }
 
 
-    public function adicionarAlunosNaTurma($idTurma, $alunos)
-    {
-        $pstmt = $this->conexao->prepare("INSERT INTO aluno_turma (idAluno, idTurma) VALUES (?, ?)");
-
-       // foreach ($alunos as $idAluno) {
-            //$pstmt->bindValue(1, $idAluno);
-            //$pstmt->bindValue(2, $idTurma);
-        //    echo "id aluno: ". $idAluno. "idturmas: ". $idTurma;
-            
-
-            //  $pstmt->execute();
-     //   }
-    echo "aqui estamos".   var_dump($alunos);
-      var_dump($idTurma);
+    public function adicionarAlunosNaTurma($idTurma, $alunosSelecionados) {
+        try {
+            // Prepare a consulta SQL
+            $sql = "INSERT INTO aluno_turma (idTurma, idAluno) VALUES (:idTurma, :idAluno)";
+            $stmt = $this->conexao->prepare($sql);
+    
+            // Percorra os alunos selecionados e insira-os na tabela de relacionamento
+            foreach ($alunosSelecionados as $alunoId) {
+                // Bind os valores de ID da turma e ID do aluno corretamente
+                $stmt->bindValue(':idTurma', $idTurma, PDO::PARAM_INT);
+                $stmt->bindValue(':idAluno', $alunoId, PDO::PARAM_INT);
+                $stmt->execute();  // Execute a inserção
+            }
+    
+        } catch (Exception $e) {
+            // Logar erro, caso ocorra algum problema
+            error_log("Erro ao adicionar alunos na turma: " . $e->getMessage());
+            throw new Exception("Erro ao adicionar alunos na turma.");
+        }
     }
+    
     public function getUltimaTurmaInserida()
     {
         return $this->conexao->lastInsertId();
