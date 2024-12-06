@@ -26,8 +26,8 @@ if (isset($_POST['remover'])) {
 }
 
 
-$alunos = $alunoController->consultarTodos();
-$alunos = $alunoController->consultarPorNome();
+//$alunos = $alunoController->consultarTodos();
+//$alunos = $alunoController->consultarPorNome();
 //var_dump($alunos);
 //var_dump($alunoController);
 //var_dump($alunoController->consultarTodos());
@@ -40,6 +40,7 @@ $alunos = $alunoController->consultarPorNome();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Alunos</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 </head>
 
@@ -47,51 +48,50 @@ $alunos = $alunoController->consultarPorNome();
     <?php require_once "navbar.php"; ?>
 
     <div class="container mt-5">
-        <h1 class="text-center">Consulta de Alunos</h1>
+        <h1 class="text-center">Controle de turmas</h1>
 
         <!-- Formulário de Pesquisa -->
         <form method="GET" class="mt-4">
             <div class="input-group mb-3">
+            <h2 class="text-center">Pesquisar alunos</h2>
                 <input type="text" class="form-control" placeholder="Pesquisar por nome ou matrícula" name="search">
                 <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
-            </div>
-        </form>
+                <select id="alunos" name="alunos[]" class="form-control" multiple>
+                    <?php
 
-        <!-- Tabela de Alunos -->
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Matricula</th>
-                    <th>Data Nasc</th>
-                    <th>Turmas</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-
-                if (isset($_POST['search'])) {
-                    $op = $_POST['search'];
-                    if ($op != "0") {
-                       
-                     //   $aluno->;teste 
-                    }
-                }
-                foreach ($alunos as $aluno) {
-                    echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
+                    $alunos = $alunoController->getAlunos();
+                    foreach ($alunos as $aluno) {
+                        echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
 
 
-                ?>
+                        ?>
+
+                    </select>
+                </div>
+            </form>
+
+            <!-- Tabela de Alunos -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Matricula</th>
+                        <th>Data Nasc</th>
+                        <th>Turmas</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
                     <tr>
                         <td><?php echo $aluno['idAluno']; ?></td>
                         <td><?php echo $aluno['nome']; ?></td>
                         <td><?php echo $aluno['matricula']; ?></td>
                         <td><?php echo $aluno['dataNasc']; ?></td>
                         <td><?php echo $turmasAssociadas; ?></td>
-                        <td><?php echo $turmasAssociadas; ?></td>
-                        
+
+
                         <td>
                             <!-- Adicionar ou Remover aluno da turma -->
                             <form method="POST" action="Alunos.php" class="d-inline">
@@ -113,6 +113,7 @@ $alunos = $alunoController->consultarPorNome();
                                 <select name="turma_id" class="form-select d-inline" required>
                                     <option value="">Selecione a turma</option>
                                     <?php
+                                    $turmasDisponiveis = $turmaController->getAlunosDaTurma($turma);
                                     foreach ($turmasDisponiveis as $turma) {
                                         echo "<option value='{$turma['IDTurma']}'>{$turma['Nome']}</option>";
                                     }
@@ -126,7 +127,17 @@ $alunos = $alunoController->consultarPorNome();
             </tbody>
         </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            $('#alunos').select2({
+                placeholder: "Selecione os alunos",
+                allowClear: true,
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

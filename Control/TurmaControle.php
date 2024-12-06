@@ -18,7 +18,7 @@ class TurmaController
         $pstmt = $this->conexao->prepare("INSERT INTO turma (nome, idProfessor) VALUES (?, ?)");
         $pstmt->bindValue(1, $turma->getNome());
         $pstmt->bindValue(2, $turma->getIdProfessor());
-       // echo "ID PROFESSOR::::",$turma->getIdProfessor();
+        // echo "ID PROFESSOR::::",$turma->getIdProfessor();
         $pstmt->execute();
         return $pstmt;
     }
@@ -28,11 +28,16 @@ class TurmaController
     {
         $pstmt = $this->conexao->prepare("INSERT INTO aluno_turma (idAluno, idTurma) VALUES (?, ?)");
 
-        foreach ($alunos as $idAluno) {
-            $pstmt->bindValue(1, $idAluno);
-            $pstmt->bindValue(2, $idTurma);
-            $pstmt->execute();
-        }
+       // foreach ($alunos as $idAluno) {
+            //$pstmt->bindValue(1, $idAluno);
+            //$pstmt->bindValue(2, $idTurma);
+        //    echo "id aluno: ". $idAluno. "idturmas: ". $idTurma;
+            
+
+            //  $pstmt->execute();
+     //   }
+    echo "aqui estamos".   var_dump($alunos);
+      var_dump($idTurma);
     }
     public function getUltimaTurmaInserida()
     {
@@ -79,7 +84,7 @@ class TurmaController
         return $pstmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-  
+
     public function removerAlunoDaTurma($idAluno, $idTurma)
     {
         $pstmt = $this->conexao->prepare("DELETE FROM aluno_turma WHERE idAluno = ? AND idTurma = ?");

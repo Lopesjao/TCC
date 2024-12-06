@@ -65,13 +65,12 @@ if ($resultado) {
 
 //$idProfessorLogado = $_SESSION['idProfessor'];
 
-
+$turmaController = new TurmaController();
 $alunoController = new AlunoController();
 $alunos = $alunoController->consultarTodos();
 
 
-$turmaController = new TurmaController();
-$turmas = $turmaController->getTurmas($prof);
+
 
 
 if (isset($_POST['cadastrar'])) {
@@ -85,11 +84,13 @@ if (isset($_POST['cadastrar'])) {
         $idTurma = $turmaController->insertTurma($turma);
         //  var_dump($idTurma);
 
-        if (isset($_POST['alunos'])) {
-            $alunosSelecionados = $_POST['alunos'];
-            $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
-            // $turmaController->insertTurma($aluno);
-        }
+         if (isset($_POST['alunos'])) {
+             $alunosSelecionados = $_POST['alunos'];
+             echo "alunos selcionados".var_dump($alunosSelecionados). "FIMMMM";
+             $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
+         //    var_dump($turma);
+             // $turmaController->insertTurma($aluno);
+         }
 
         echo "<div class='alert alert-success'>Turma cadastrada e alunos adicionados com sucesso!</div>";
     } catch (Exception $e) {
@@ -108,6 +109,7 @@ if (isset($_POST['cadastrar'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Turma</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -130,6 +132,8 @@ if (isset($_POST['cadastrar'])) {
                 <select id="turma_existente" name="turma_existente" class="form-select">
                     <option value="">Selecione uma turma (opcional)</option>
                     <?php
+                    //$turmaController = new TurmaController();
+                    $turmas = $turmaController->getTurmasPorProfessor($prof->getidProfessor());
                     foreach ($turmas as $turma) {
                         echo "<option value='{$turma['idTurma']}'>{$turma['nome']}</option>";
                     }
@@ -143,20 +147,34 @@ if (isset($_POST['cadastrar'])) {
                 <select id="alunos" name="alunos[]" class="form-select" multiple required>
                     <option value="">Selecione os alunos</option>
                     <?php
+                    $alunoController = new AlunoController();
+                    $alunos = $alunoController->getAlunos2();
                     foreach ($alunos as $aluno) {
                         echo "<option value='{$aluno['idAluno']}'>{$aluno['nome']}</option>";
-                        echo "<option value='{$aluno['idAluno']}'>{$aluno['matricula']}</option>";
+                        //  echo "<option value='{$aluno['idAluno']}'>{$aluno['matricula']}</option>";
                     }
                     ?>
                 </select>
             </div>
 
             <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
+            <a class="btn btn-primary" href="Alunos.php" role="button">Visualizar Turmas</a>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            $('#alunos').select2({
+                placeholder: "Selecione os alunos",
+                allowClear: true,
+                
+            });
+        });
+    </script>
     <footer> <?php require_once "footer.php"; ?></footer>
 </body>
 

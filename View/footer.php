@@ -18,7 +18,7 @@ if (!isset($_SESSION)) {
             width: 100%;
             color: white;
             background-color: #2D55AD;
-            height: 80% !important;
+            height: auto !important;
             padding: 20px 0;
         }
 

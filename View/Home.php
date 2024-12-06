@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 
 
 if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
-  echo "é professor";
+ // echo "é professor";
   //$aluno = new Aluno(unserialize($_SESSION["aluno"]));
   //$_SESSION['usuario_sessao'] = ; 
   // var_dump($_SESSION);
@@ -32,7 +32,6 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página Inicial</title>
-  <!-- Link do Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="Style.css">
@@ -43,7 +42,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
 
     body {
       background-image: url('imagens/body.png');
-      /* Substitua pelo caminho correto */
+     
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -51,7 +50,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
       height: 100vh;
     }
 
-    /* Centralização do conteúdo principal */
+    
     .center-content {
       text-align: center;
       padding-top: 20vh;
@@ -76,7 +75,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
 
     .navbar {
       background-color: rgba(0, 0, 0, 0.8);
-      /* Navbar transparente */
+     
     }
     #botoes{
       display: flex;
@@ -93,7 +92,6 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
   </header>
 
 
-  <h1>Bem Vindo ao InfoQuest</h1>
 
   <div class="container-fluid center-content">
 

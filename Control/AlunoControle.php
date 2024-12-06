@@ -185,7 +185,7 @@ class AlunoController
     public function getAlunos()
     {
         $conn = Conexao::getConexao();
-        $sql = "SELECT * FROM aluno";
+        $sql = "SELECT * FROM aluno limit 5";
         $pstmt = $conn->prepare($sql);
         $pstmt->execute();
         //while($linha = $pstmt->fetch()){
@@ -193,6 +193,19 @@ class AlunoController
 
 
     }
+
+    public function getAlunos2()
+    {
+        $conn = Conexao::getConexao();
+        $sql = "SELECT * FROM aluno ";
+        $pstmt = $conn->prepare($sql);
+        $pstmt->execute();
+        //while($linha = $pstmt->fetch()){
+        return $pstmt;
+
+
+    }
+
 
     //esse é meu metodo de verificar o login como n estou usando hash na senha acredito
 // que seria so verificar se é igual com o do banco
