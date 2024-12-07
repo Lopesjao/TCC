@@ -86,8 +86,8 @@ if (isset($_POST['cadastrar'])) {
 
         if (isset($_POST['alunos']) && !empty($_POST['alunos'])) {
             $alunosSelecionados = $_POST['alunos'];
-         //  echo" alunos AQUI::::". var_dump($alunosSelecionados);  // Verifique o conteúdo de $alunosSelecionados
-         //   var_dump($idTurma);
+            //  echo" alunos AQUI::::". var_dump($alunosSelecionados);  // Verifique o conteúdo de $alunosSelecionados
+            //   var_dump($idTurma);
             $turmaController->adicionarAlunosNaTurma($idTurma, $alunosSelecionados);
         }
 
@@ -130,10 +130,20 @@ if (isset($_POST['cadastrar'])) {
                 <select id="turma_existente" name="turma_existente" class="form-select">
                     <option value="">Selecione uma turma (opcional)</option>
                     <?php
-                    //$turmaController = new TurmaController();
-                    $turmas = $turmaController->getTurmasPorProfessor($prof->getidProfessor());
-                    foreach ($turmas as $turma) {
-                        echo "<option value='{$turma['idTurma']}'>{$turma['nome']}</option>";
+                    if (!isset($turmaController)) {
+                        echo "<option value=''>Erro: Controller de Turmas não inicializado.</option>";
+                    } else {
+                        $turmas = $turmaController->getTurmasPorProfessor($prof->getidProfessor());
+                        if (empty($turmas)) {
+                            echo "<option value=''>Nenhuma turma disponível</option>";
+                        } else {
+                            foreach ($turmas as $turma) {
+                                $idTurma = htmlspecialchars($turma['idTurma'], ENT_QUOTES, 'UTF-8');
+                                $nomeTurma = htmlspecialchars($turma['nome'], ENT_QUOTES, 'UTF-8');
+                                echo "<option value='{$idTurma}'>{$nomeTurma}</option>";
+                               // echo "<option value='{$idTurma}'>{$nomeTurma}</option>";
+                            }
+                        }
                     }
                     ?>
                 </select>
@@ -165,7 +175,7 @@ if (isset($_POST['cadastrar'])) {
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#alunos').select2({
                 placeholder: "Selecione os alunos",
                 allowClear: true,

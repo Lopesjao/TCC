@@ -46,7 +46,8 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
             $_SESSION['google_name'] = implode(' ', $google_name_parts);
             $_SESSION['google_picture'] = isset($profile['picture']) ? $profile['picture'] : '';
             // Redirect to profile page
-            header('Location: profile.php');
+            header('Location: Home.php');
+            echo "logou";
             exit;
         } else {
             exit('Could not retrieve profile information! Please try again later!');

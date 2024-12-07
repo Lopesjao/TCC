@@ -38,21 +38,8 @@ if (!isset($_SESSION)) {
     <footer class="custom-footer">
         <div class="container text-center">
             <div class="row">
-                <div class="col-md-4">
-                    <h5>Sobre Nós</h5>
-                    <p>Objeto de Aprendizagem para auxilio da Disciplina de Arquitetura de Organização de Computadores
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Links Rápidos</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="Home.php">Home</a></li>
-                        <li><a href="manutencao.php">Manutenção</a></li>
-                        <li><a href="pecas.php">Peças</a></li>
-                        <li><a href="quiz.php">Quiz</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
+           
+                <div class="">
                     <h5>Contato</h5>
                     <p>Email: Lopesjao2503@gmail.com</p>
 

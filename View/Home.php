@@ -39,7 +39,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     .carousel {
       position: relative;
       width: 80%;
-      max-width: 600px;
+      max-width: 400px;
       overflow: hidden;
       margin: 0 auto;
       border: 2px solid #ccc;
@@ -123,7 +123,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
 
 
     .center-content {
-      border: 2px solid #2D55AD;
+
       /* Borda com uma cor mais clara */
       border-radius: 10px;
       /* Arredonda as bordas */
@@ -164,7 +164,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     }
 
     body {
-      background-image: url('imagens/body.png');
+
 
       background-size: cover;
       background-position: center;
@@ -186,7 +186,8 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     }
 
     #containerbt {
-
+      background-color: #2D55AD;
+      
       /* Cor de fundo do contêiner */
       border: 2px solid #2D55AD;
       /* Borda com uma cor mais clara */
@@ -238,6 +239,10 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
 
 
   <div class="container-fluid center-content">
+    <div>
+      <h1>Bem vindo ao InfoQuest</h1>
+      <p>Objeto de Aprendizagem para auxilio da Disciplina de Arquitetura de Organização de Computadores</p>
+    </div>
 
     <div class="carousel">
       <div class="slides">
@@ -259,7 +264,8 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
           </div>
           <div>
             <p>Sou Professor:</p>
-            <a class="btn btn-secondary btn-lg btn-space" href="CadastroProfessor.php" role="button">Login / Cadastro</a>
+            <a class="btn btn-secondary btn-lg btn-space" href="CadastroProfessor.php" role="button">Login /
+              Cadastro</a>
           </div>
         </div>
       </div>

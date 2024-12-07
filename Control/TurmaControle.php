@@ -73,14 +73,22 @@ class TurmaController
     }
 
 
-    public function getTurmasPorProfessor($idProfessor)
-    {
-        $pstmt = $this->conexao->prepare("SELECT nome FROM turma WHERE idProfessor = ?");
-        $pstmt->bindValue(1, $idProfessor);
-        $pstmt->execute();
-        return $pstmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getTurmasPorProfessor($idProfessor) {
+        $query = "SELECT * FROM turma WHERE idProfessor = :idProfessor";
+        try {
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindParam(':idProfessor', $idProfessor, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Debugging
+            var_dump($result); // Verifique os resultados
+            return $result;
+        } catch (PDOException $e) {
+            echo "Erro: " . $e->getMessage();
+            return [];
+        }
     }
-
+    
     public function getTurmas($idProfessor)
     {
         $pstmt = $this->conexao->prepare("SELECT nome FROM turma");
