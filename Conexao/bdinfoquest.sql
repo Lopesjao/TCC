@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Dez-2024 às 19:11
--- Versão do servidor: 10.4.8-MariaDB
--- versão do PHP: 7.1.33
+-- Tempo de geração: 07/12/2024 às 01:02
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno`
+-- Estrutura para tabela `aluno`
 --
 
 CREATE TABLE `aluno` (
@@ -35,10 +34,10 @@ CREATE TABLE `aluno` (
   `matricula` varchar(50) DEFAULT NULL,
   `dataNasc` date NOT NULL,
   `senha` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `aluno`
+-- Despejando dados para a tabela `aluno`
 --
 
 INSERT INTO `aluno` (`idAluno`, `nome`, `email`, `matricula`, `dataNasc`, `senha`) VALUES
@@ -73,18 +72,28 @@ INSERT INTO `aluno` (`idAluno`, `nome`, `email`, `matricula`, `dataNasc`, `senha
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno_turma`
+-- Estrutura para tabela `aluno_turma`
 --
 
 CREATE TABLE `aluno_turma` (
   `idAluno` int(11) NOT NULL,
   `idTurma` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `aluno_turma`
+--
+
+INSERT INTO `aluno_turma` (`idAluno`, `idTurma`) VALUES
+(2, 1),
+(4, 1),
+(5, 1),
+(21, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `professor`
+-- Estrutura para tabela `professor`
 --
 
 CREATE TABLE `professor` (
@@ -94,10 +103,10 @@ CREATE TABLE `professor` (
   `matricula` varchar(50) DEFAULT NULL,
   `dataNasc` date NOT NULL,
   `senha` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `professor`
+-- Despejando dados para a tabela `professor`
 --
 
 INSERT INTO `professor` (`idProfessor`, `nome`, `email`, `matricula`, `dataNasc`, `senha`) VALUES
@@ -109,17 +118,42 @@ INSERT INTO `professor` (`idProfessor`, `nome`, `email`, `matricula`, `dataNasc`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `turma`
+-- Estrutura para tabela `quiz`
+--
+
+CREATE TABLE `quiz` (
+  `idQuiz` int(11) NOT NULL,
+  `idProfessor` int(11) NOT NULL,
+  `idTurma` int(11) NOT NULL,
+  `pergunta` text NOT NULL,
+  `alternativaA` varchar(255) NOT NULL,
+  `alternativaB` varchar(255) NOT NULL,
+  `alternativaC` varchar(255) NOT NULL,
+  `alternativaD` varchar(255) NOT NULL,
+  `correta` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `quiz`
+--
+
+INSERT INTO `quiz` (`idQuiz`, `idProfessor`, `idTurma`, `pergunta`, `alternativaA`, `alternativaB`, `alternativaC`, `alternativaD`, `correta`) VALUES
+(1, 1, 10, 'Qual é a capital da França?', 'Londres', 'Paris', 'Berlim', 'Madrid', 'B');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `turma`
 --
 
 CREATE TABLE `turma` (
   `idTurma` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `idProfessor` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `turma`
+-- Despejando dados para a tabela `turma`
 --
 
 INSERT INTO `turma` (`idTurma`, `nome`, `idProfessor`) VALUES
@@ -131,40 +165,60 @@ INSERT INTO `turma` (`idTurma`, `nome`, `idProfessor`) VALUES
 (27, 'turma teste de agora 100', NULL),
 (30, '', 1),
 (31, '', 1),
-(32, 'rafael gamemaker', 1);
+(32, 'rafael gamemaker', 1),
+(40, 'turma redes', 4),
+(41, 'teste turma', 4),
+(42, 'aaaaaa', 4),
+(43, 'joao', 4),
+(44, 'turma teste', 4),
+(45, 'turma 20', 4),
+(46, 'turma teste', 4),
+(47, 'turma teste', 4),
+(48, 'turma gustavo', 4),
+(49, 'turma gustavo', 4),
+(50, 'turma 4', 4),
+(51, 'turma prof alecson', 4);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `aluno`
+-- Índices de tabela `aluno`
 --
 ALTER TABLE `aluno`
   ADD PRIMARY KEY (`idAluno`);
 
 --
--- Índices para tabela `aluno_turma`
+-- Índices de tabela `aluno_turma`
 --
 ALTER TABLE `aluno_turma`
   ADD PRIMARY KEY (`idAluno`,`idTurma`),
   ADD KEY `idTurma` (`idTurma`) USING BTREE;
 
 --
--- Índices para tabela `professor`
+-- Índices de tabela `professor`
 --
 ALTER TABLE `professor`
   ADD PRIMARY KEY (`idProfessor`);
 
 --
--- Índices para tabela `turma`
+-- Índices de tabela `quiz`
+--
+ALTER TABLE `quiz`
+  ADD PRIMARY KEY (`idQuiz`),
+  ADD KEY `idProfessor` (`idProfessor`),
+  ADD KEY `idTurma` (`idTurma`);
+
+--
+-- Índices de tabela `turma`
 --
 ALTER TABLE `turma`
   ADD PRIMARY KEY (`idTurma`),
   ADD KEY `idProfessor` (`idProfessor`) USING BTREE;
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -180,24 +234,37 @@ ALTER TABLE `professor`
   MODIFY `idProfessor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de tabela `quiz`
+--
+ALTER TABLE `quiz`
+  MODIFY `idQuiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de tabela `turma`
 --
 ALTER TABLE `turma`
-  MODIFY `idTurma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idTurma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `aluno_turma`
+-- Restrições para tabelas `aluno_turma`
 --
 ALTER TABLE `aluno_turma`
   ADD CONSTRAINT `aluno_turma_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`idAluno`),
   ADD CONSTRAINT `aluno_turma_ibfk_2` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idTurma`);
 
 --
--- Limitadores para a tabela `turma`
+-- Restrições para tabelas `quiz`
+--
+ALTER TABLE `quiz`
+  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`idProfessor`) ON DELETE CASCADE,
+  ADD CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idTurma`) ON DELETE CASCADE;
+
+--
+-- Restrições para tabelas `turma`
 --
 ALTER TABLE `turma`
   ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`idProfessor`);
