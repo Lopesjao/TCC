@@ -56,9 +56,29 @@ background-color:beige !important;;
                     <li class="nav-item">
                         <a class="nav-link" href="pecas.php">Peças</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="quiz.php">Quiz</a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "aluno") {
+                        //echo "é professor";
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="quiz.php">Quiz</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
+                        <?php
+                    if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
+                        //echo "é professor";
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Controlequiz.php">Quiz</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
+
+
+
                     <?php
                     if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
                         //echo "é professor";

@@ -267,6 +267,43 @@ class AlunoController
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAlunosPorTurma22($idTurma)
+    {
+        try {
+            // Obtém a conexão com o banco de dados
+            $conn = Conexao::getConexao();
+    
+            // Prepara a consulta SQL
+            $query = "SELECT aluno.idAluno, aluno.nome 
+                      FROM aluno 
+                      INNER JOIN aluno_turma ON aluno.idAluno = aluno_turma.idAluno
+                      WHERE aluno_turma.idTurma = :idTurma";
+    
+            // Prepara a execução da consulta
+            $stmt = $conn->prepare($query);
+            
+            // Associa o parâmetro à variável
+            $stmt->bindParam(':idTurma', $idTurma, PDO::PARAM_INT);
+            
+            // Executa a consulta
+            $stmt->execute();
+    
+            // Verifica se há resultados
+            $alunos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Verifica se foram encontrados alunos
+            if ($alunos) {
+                return $alunos;
+            } else {
+                return [];  // Retorna um array vazio se não houver alunos
+            }
+    
+        } catch (PDOException $e) {
+            // Em caso de erro, lança uma exceção
+            throw new Exception("Erro ao buscar alunos da turma: " . $e->getMessage());
+        }
+    }
+    
     public function getAlunos2()
     {
         $conn = Conexao::getConexao();

@@ -119,7 +119,21 @@ public function adicionarAlunosNaTurma($idTurma, $alunos) {
 
 
 
-
+    public function ConsultaTurmasComAlunos($pagina = 1, $itensPorPagina = 5, $termoBusca = '') {
+        $inicio = ($pagina - 1) * $itensPorPagina;
+    
+        // Modifique a consulta para incluir a pesquisa
+        $queryTurmas = "SELECT * FROM turma WHERE nome LIKE :busca LIMIT :inicio, :itensPorPagina";
+        $stmtTurmas = $this->conexao->prepare($queryTurmas);
+        $stmtTurmas->bindValue(':busca', "%$termoBusca%", PDO::PARAM_STR);
+        $stmtTurmas->bindValue(':inicio', $inicio, PDO::PARAM_INT);
+        $stmtTurmas->bindValue(':itensPorPagina', $itensPorPagina, PDO::PARAM_INT);
+        $stmtTurmas->execute();
+        $turmas = $stmtTurmas->fetchAll(PDO::FETCH_ASSOC);
+    
+        // Código restante igual ao anterior...
+    }
+    
 
     public function consultarTurmasComAlunos($pagina = 1, $itensPorPagina = 5) {
         // Calcula o limite de início para a consulta
@@ -212,7 +226,34 @@ public function getAlunosDaTurmapg($turmaId, $limite, $offset) {
         $stmt->execute([$turmaId]);
         return $stmt->fetchColumn();
     }
-
+    public function excluirTurma($idTurma)
+    {
+        // Inicia a transação
+        $this->conexao->beginTransaction();
+        
+        try {
+            // Exclui os alunos dessa turma (se houver)
+            $queryAlunos = "DELETE FROM aluno_turma WHERE idTurma = :idTurma";
+            $stmtAlunos = $this->conexao->prepare($queryAlunos);
+            $stmtAlunos->bindParam(':idTurma', $idTurma, PDO::PARAM_INT);
+            $stmtAlunos->execute();
+            
+            // Agora, exclui a turma
+            $queryTurma = "DELETE FROM turma WHERE idTurma = :idTurma";
+            $stmtTurma = $this->conexao->prepare($queryTurma);
+            $stmtTurma->bindParam(':idTurma', $idTurma, PDO::PARAM_INT);
+            $stmtTurma->execute();
+            
+            // Commit da transação
+            $this->conexao->commit();
+        } catch (PDOException $e) {
+            // Caso ocorra um erro, desfaz as mudanças
+            $this->conexao->rollBack();
+            throw $e; // Re-lança o erro
+        }
+    }
+    
+    
     public function getAlunos()
     {
         $pstmt = $this->conexao->prepare("SELECT nome FROM aluno");
