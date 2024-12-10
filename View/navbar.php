@@ -51,7 +51,7 @@ background-color:beige !important;;
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="manutencao.php">Manutenção</a>
+                        <a class="nav-link" href="CadastrarEroo.php">Manutenção</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pecas.php">Peças</a>
