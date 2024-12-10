@@ -61,7 +61,7 @@ background-color:beige !important;;
                         //echo "é professor";
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="quiz.php">Quiz</a>
+                            <a class="nav-link" href="exibir_quizzes.php">Quiz</a>
                         </li>
                         <?php
                     }
@@ -71,7 +71,7 @@ background-color:beige !important;;
                         //echo "é professor";
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="Controlequiz.php">Quiz</a>
+                            <a class="nav-link" href="CriarQuiz.php">Quiz</a>
                         </li>
                         <?php
                     }

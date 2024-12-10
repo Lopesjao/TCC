@@ -15,6 +15,7 @@ $termoBusca = isset($_GET['busca']) ? trim($_GET['busca']) : '';
 // Crie a instância do controlador de turma
 $turmaController = new TurmaController();
 $resultado = $turmaController->consultarTurmasComAlunos($pagina, $itensPorPagina, $termoBusca);
+//$turmas = $turmaController->getTurmasDoProfessor2($professorId, $nomeTurma);
 $turmasComAlunos = $resultado['turmas'];
 $totalPaginas = $resultado['totalPaginas'];
 $paginaAtual = $resultado['paginaAtual'];
