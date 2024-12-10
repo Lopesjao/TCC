@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09/12/2024 às 08:15
+-- Tempo de geração: 10/12/2024 às 07:55
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -74,19 +74,6 @@ INSERT INTO `aluno` (`idAluno`, `nome`, `email`, `matricula`, `dataNasc`, `senha
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `aluno_quiz_resposta`
---
-
-CREATE TABLE `aluno_quiz_resposta` (
-  `idAluno` int(11) NOT NULL,
-  `idQuiz` int(11) NOT NULL,
-  `idPergunta` int(11) NOT NULL,
-  `idResposta` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `aluno_turma`
 --
 
@@ -125,14 +112,24 @@ INSERT INTO `aluno_turma` (`idAluno`, `idTurma`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `pergunta`
+-- Estrutura para tabela `erros`
 --
 
-CREATE TABLE `pergunta` (
-  `idPergunta` int(11) NOT NULL,
-  `idQuiz` int(11) DEFAULT NULL,
-  `pergunta` text NOT NULL
+CREATE TABLE `erros` (
+  `idErro` int(11) NOT NULL,
+  `descricaoErro` text NOT NULL,
+  `idAluno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `erros`
+--
+
+INSERT INTO `erros` (`idErro`, `descricaoErro`, `idAluno`) VALUES
+(1, 'o computador nao liga', 12),
+(2, 'pc nao liga', 12),
+(3, 'pc nao liga', 12),
+(4, 'aaaaaaaaaa', 12);
 
 -- --------------------------------------------------------
 
@@ -167,24 +164,142 @@ INSERT INTO `professor` (`idProfessor`, `nome`, `email`, `matricula`, `dataNasc`
 --
 
 CREATE TABLE `quiz` (
-  `idQuiz` int(11) NOT NULL,
-  `idProfessor` int(11) DEFAULT NULL,
-  `idTurma` int(11) DEFAULT NULL,
-  `titulo` varchar(255) NOT NULL
+  `id` int(11) NOT NULL,
+  `pergunta` varchar(255) NOT NULL,
+  `alternativa_a` varchar(255) NOT NULL,
+  `alternativa_b` varchar(255) NOT NULL,
+  `alternativa_c` varchar(255) NOT NULL,
+  `alternativa_d` varchar(255) NOT NULL,
+  `correta` char(1) NOT NULL,
+  `professor_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `quiz`
+--
+
+INSERT INTO `quiz` (`id`, `pergunta`, `alternativa_a`, `alternativa_b`, `alternativa_c`, `alternativa_d`, `correta`, `professor_id`) VALUES
+(1, 'aaa', 'a', 'a', 'a', 'a', 'B', NULL),
+(2, 'aaa', 'a', 'a', 'a', 'a', 'B', 4),
+(3, 'teste', 'aaa', 'aa', 'a', 'a', 'B', 4),
+(4, 'qual a funçao do mouse', 'arrastar', 'teclar', 'digitar', 'nao sei mais', 'A', 4),
+(5, 'estou louco', 'sim', 'sim 2', 'claro', 'sim com certeza', 'A', 4);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `resposta`
+-- Estrutura para tabela `quizzes`
 --
 
-CREATE TABLE `resposta` (
-  `idResposta` int(11) NOT NULL,
-  `idPergunta` int(11) DEFAULT NULL,
-  `resposta` text NOT NULL,
-  `isCorreta` tinyint(1) NOT NULL DEFAULT 0
+CREATE TABLE `quizzes` (
+  `id` int(11) NOT NULL,
+  `nome_quiz` varchar(255) NOT NULL,
+  `professor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `quizzes`
+--
+
+INSERT INTO `quizzes` (`id`, `nome_quiz`, `professor_id`) VALUES
+(1, 'Quiz 1', 4),
+(2, 'Quiz 3', 4),
+(3, 'Quiz 4', 4),
+(4, 'quiz teste', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `quiz_perguntas`
+--
+
+CREATE TABLE `quiz_perguntas` (
+  `quiz_id` int(11) NOT NULL,
+  `pergunta_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `quiz_perguntas`
+--
+
+INSERT INTO `quiz_perguntas` (`quiz_id`, `pergunta_id`) VALUES
+(1, 2),
+(2, 2),
+(2, 3),
+(2, 4),
+(2, 5),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 5),
+(4, 3),
+(4, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `respostas`
+--
+
+CREATE TABLE `respostas` (
+  `id` int(11) NOT NULL,
+  `quiz_id` int(11) NOT NULL,
+  `aluno_id` int(11) NOT NULL,
+  `resposta` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `respostas`
+--
+
+INSERT INTO `respostas` (`id`, `quiz_id`, `aluno_id`, `resposta`) VALUES
+(1, 2, 12, 'C'),
+(2, 3, 12, 'A'),
+(3, 4, 12, 'A'),
+(4, 5, 12, 'A'),
+(5, 2, 12, 'C'),
+(6, 3, 12, 'A'),
+(7, 4, 12, 'A'),
+(8, 5, 12, 'A'),
+(9, 3, 12, 'A'),
+(10, 4, 12, 'A'),
+(11, 3, 12, 'A'),
+(12, 4, 12, 'A'),
+(13, 2, 12, 'A'),
+(14, 2, 12, 'A'),
+(15, 2, 12, 'A'),
+(16, 2, 12, 'B'),
+(17, 2, 12, 'A'),
+(18, 2, 12, 'C'),
+(19, 2, 12, 'C'),
+(20, 3, 12, 'A'),
+(21, 4, 12, 'A'),
+(22, 3, 12, 'B'),
+(23, 4, 12, 'A'),
+(24, 3, 12, 'C'),
+(25, 4, 12, 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `resposta_erro`
+--
+
+CREATE TABLE `resposta_erro` (
+  `idRespostaErro` int(11) NOT NULL,
+  `idErro` int(11) NOT NULL,
+  `resposta` text NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `tipoUsuario` enum('aluno','professor') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `resposta_erro`
+--
+
+INSERT INTO `resposta_erro` (`idRespostaErro`, `idErro`, `resposta`, `idUsuario`, `tipoUsuario`) VALUES
+(1, 1, 'afafaf', 0, 'aluno'),
+(2, 2, 'aaaaaaa', 12, 'aluno');
 
 -- --------------------------------------------------------
 
@@ -285,15 +400,6 @@ ALTER TABLE `aluno`
   ADD PRIMARY KEY (`idAluno`);
 
 --
--- Índices de tabela `aluno_quiz_resposta`
---
-ALTER TABLE `aluno_quiz_resposta`
-  ADD PRIMARY KEY (`idAluno`,`idQuiz`,`idPergunta`),
-  ADD KEY `idQuiz` (`idQuiz`),
-  ADD KEY `idPergunta` (`idPergunta`),
-  ADD KEY `idResposta` (`idResposta`);
-
---
 -- Índices de tabela `aluno_turma`
 --
 ALTER TABLE `aluno_turma`
@@ -301,11 +407,11 @@ ALTER TABLE `aluno_turma`
   ADD KEY `idTurma` (`idTurma`) USING BTREE;
 
 --
--- Índices de tabela `pergunta`
+-- Índices de tabela `erros`
 --
-ALTER TABLE `pergunta`
-  ADD PRIMARY KEY (`idPergunta`),
-  ADD KEY `idQuiz` (`idQuiz`);
+ALTER TABLE `erros`
+  ADD PRIMARY KEY (`idErro`),
+  ADD KEY `idAluno` (`idAluno`);
 
 --
 -- Índices de tabela `professor`
@@ -317,16 +423,37 @@ ALTER TABLE `professor`
 -- Índices de tabela `quiz`
 --
 ALTER TABLE `quiz`
-  ADD PRIMARY KEY (`idQuiz`),
-  ADD KEY `idProfessor` (`idProfessor`),
-  ADD KEY `idTurma` (`idTurma`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `professor_id` (`professor_id`);
 
 --
--- Índices de tabela `resposta`
+-- Índices de tabela `quizzes`
 --
-ALTER TABLE `resposta`
-  ADD PRIMARY KEY (`idResposta`),
-  ADD KEY `idPergunta` (`idPergunta`);
+ALTER TABLE `quizzes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `professor_id` (`professor_id`);
+
+--
+-- Índices de tabela `quiz_perguntas`
+--
+ALTER TABLE `quiz_perguntas`
+  ADD KEY `quiz_id` (`quiz_id`),
+  ADD KEY `pergunta_id` (`pergunta_id`);
+
+--
+-- Índices de tabela `respostas`
+--
+ALTER TABLE `respostas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quiz_id` (`quiz_id`),
+  ADD KEY `aluno_id` (`aluno_id`);
+
+--
+-- Índices de tabela `resposta_erro`
+--
+ALTER TABLE `resposta_erro`
+  ADD PRIMARY KEY (`idRespostaErro`),
+  ADD KEY `idErro` (`idErro`);
 
 --
 -- Índices de tabela `turma`
@@ -346,10 +473,10 @@ ALTER TABLE `aluno`
   MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT de tabela `pergunta`
+-- AUTO_INCREMENT de tabela `erros`
 --
-ALTER TABLE `pergunta`
-  MODIFY `idPergunta` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `erros`
+  MODIFY `idErro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `professor`
@@ -361,13 +488,25 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT de tabela `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `idQuiz` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de tabela `resposta`
+-- AUTO_INCREMENT de tabela `quizzes`
 --
-ALTER TABLE `resposta`
-  MODIFY `idResposta` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `quizzes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `respostas`
+--
+ALTER TABLE `respostas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de tabela `resposta_erro`
+--
+ALTER TABLE `resposta_erro`
+  MODIFY `idRespostaErro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `turma`
@@ -380,15 +519,6 @@ ALTER TABLE `turma`
 --
 
 --
--- Restrições para tabelas `aluno_quiz_resposta`
---
-ALTER TABLE `aluno_quiz_resposta`
-  ADD CONSTRAINT `aluno_quiz_resposta_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`idAluno`),
-  ADD CONSTRAINT `aluno_quiz_resposta_ibfk_2` FOREIGN KEY (`idQuiz`) REFERENCES `quiz` (`idQuiz`),
-  ADD CONSTRAINT `aluno_quiz_resposta_ibfk_3` FOREIGN KEY (`idPergunta`) REFERENCES `pergunta` (`idPergunta`),
-  ADD CONSTRAINT `aluno_quiz_resposta_ibfk_4` FOREIGN KEY (`idResposta`) REFERENCES `resposta` (`idResposta`);
-
---
 -- Restrições para tabelas `aluno_turma`
 --
 ALTER TABLE `aluno_turma`
@@ -396,23 +526,42 @@ ALTER TABLE `aluno_turma`
   ADD CONSTRAINT `aluno_turma_ibfk_2` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idTurma`);
 
 --
--- Restrições para tabelas `pergunta`
+-- Restrições para tabelas `erros`
 --
-ALTER TABLE `pergunta`
-  ADD CONSTRAINT `pergunta_ibfk_1` FOREIGN KEY (`idQuiz`) REFERENCES `quiz` (`idQuiz`);
+ALTER TABLE `erros`
+  ADD CONSTRAINT `erros_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `aluno` (`idAluno`);
 
 --
 -- Restrições para tabelas `quiz`
 --
 ALTER TABLE `quiz`
-  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`idProfessor`),
-  ADD CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idTurma`);
+  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professor` (`idProfessor`);
 
 --
--- Restrições para tabelas `resposta`
+-- Restrições para tabelas `quizzes`
 --
-ALTER TABLE `resposta`
-  ADD CONSTRAINT `resposta_ibfk_1` FOREIGN KEY (`idPergunta`) REFERENCES `pergunta` (`idPergunta`);
+ALTER TABLE `quizzes`
+  ADD CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professor` (`idProfessor`);
+
+--
+-- Restrições para tabelas `quiz_perguntas`
+--
+ALTER TABLE `quiz_perguntas`
+  ADD CONSTRAINT `quiz_perguntas_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`),
+  ADD CONSTRAINT `quiz_perguntas_ibfk_2` FOREIGN KEY (`pergunta_id`) REFERENCES `quiz` (`id`);
+
+--
+-- Restrições para tabelas `respostas`
+--
+ALTER TABLE `respostas`
+  ADD CONSTRAINT `respostas_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`),
+  ADD CONSTRAINT `respostas_ibfk_2` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`idAluno`);
+
+--
+-- Restrições para tabelas `resposta_erro`
+--
+ALTER TABLE `resposta_erro`
+  ADD CONSTRAINT `resposta_erro_ibfk_1` FOREIGN KEY (`idErro`) REFERENCES `erros` (`idErro`);
 
 --
 -- Restrições para tabelas `turma`
