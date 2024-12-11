@@ -24,6 +24,11 @@ $professorId = $_SESSION['usuario_sessao'];
     <title>Visualizar Quiz</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="Style.css">
+    <style>
+.btn{
+    margin-top: 3%;
+}
+    </style>
 </head>
 
 <body>
@@ -31,7 +36,7 @@ $professorId = $_SESSION['usuario_sessao'];
     
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow-lg p-4" style="max-width: 800px; width: 100%;">
-            <h2 class="text-center mb-4">Visualizar Quiz</h2>
+            <h2 class="text-center mb-4">Criar Quiz</h2>
 
             <!--  mensagem de sucesso na sessão -->
             <?php
@@ -73,6 +78,7 @@ $professorId = $_SESSION['usuario_sessao'];
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Criar Quiz</button>
+                <a class="btn btn-primary w-100" href="exibir_quizzes.php"> Visualizar Quiz </a>
             </form>
         </div>
     </div>

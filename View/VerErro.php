@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php foreach ($erros as $erro): ?>
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Erro ID: <?php echo $erro['idErro']; ?></h5>
+                 
                         <p class="card-text"><strong>Descrição:</strong> <?php echo htmlspecialchars($erro['descricaoErro']); ?></p>
                         <p class="card-text"><small class="text-muted">Cadastrado por: <?php echo htmlspecialchars($erro['nomeAluno']); ?></small></p>
 

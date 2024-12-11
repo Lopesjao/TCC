@@ -22,15 +22,15 @@ $charset = 'utf8mb4';
 // Configuração de conexão com PDO
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
+    PDO::ATTR_EMULATE_PREPARES => false,
 ];
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    throw new \PDOException($e->getMessage(), (int) $e->getCode());
 }
 
 // Verifica se o professor está logado (se a sessão contém o ID do professor)
@@ -39,9 +39,9 @@ if (!isset($_SESSION['usuario_sessao'])) {
     exit;
 }
 
-// Processa o formulário de criação do quiz
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Obtém os dados do formulário
+
     $pergunta = $_POST['pergunta'];
     $alternativa_a = $_POST['alternativa_a'];
     $alternativa_b = $_POST['alternativa_b'];
@@ -80,9 +80,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Quiz</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+   
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <link rel="stylesheet" href="Style.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+.btn{
+    margin-top: 3%;
+}
+    </style>
+
+    
 </head>
 
 <body>
@@ -90,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%;">
-            <h2 class="text-center mb-4">Criar Quiz</h2>
+            <h2 class="text-center mb-4">Criar Questões</h2>
 
             <!-- Formulário para criar o quiz -->
             <form action="CriarQuiz.php" method="POST">
@@ -128,8 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="D">Alternativa D</option>
                     </select>
                 </div>
-
-                <button type="submit" class="btn btn-primary w-100">Criar Quiz</button>
+              
+                    <button type="submit" class="btn btn-primary w-100">Criar questões</button>
+                    <a class="btn btn-primary w-100" href="exibir_quizzes.php"> Visualizar Quiz </a>
+                    <a class="btn btn-primary w-100" href="visualizar_quiz.php"> Criar Quiz </a>
+             
             </form>
         </div>
     </div>

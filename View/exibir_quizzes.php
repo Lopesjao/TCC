@@ -18,13 +18,20 @@ $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exibir Quizzes</title>
+    <link rel="stylesheet" href="styles.css">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+.btn{
+    margin-top: 3%;
+}
+    </style>
 </head>
 
 <body>
     <?php require_once "navbar.php"; ?>
 
-    <div class="container mt-5">
+    <div class="container justify-content-center align-items-center">
         <h2 class="text-center mb-4">Quizzes Disponíveis</h2>
 
         <?php if (count($quizzes) > 0): ?>
@@ -41,7 +48,9 @@ $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <footer><?php require_once "footer.php"; ?></footer>
+    
+   
+
 </body>
 
 </html>

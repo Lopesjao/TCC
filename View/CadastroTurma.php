@@ -31,9 +31,9 @@ if ($resultado) {
     //var_dump($aluno);
     $_SESSION['usuario_sessao'] = $prof->getidProfessor();
     $_SESSION['tipo'] = "prof";
-    echo "prof entrou";
-    echo $prof;
-    echo $_SESSION['usuario_sessao'];
+   // echo "prof entrou";
+    //echo $prof;
+  //  echo $_SESSION['usuario_sessao'];
     // header('Location: Home.php');
     //  exit();
 }
@@ -140,7 +140,7 @@ if (isset($_POST['cadastrar'])) {
     <?php require_once "navbar.php"; ?>
 
 
-    <div class="container mt-5">
+    <div class="container mt-5 min-vh-80 ">
         <h1 class="text-center">Cadastro de Turma</h1>
         <form action="CadastroTurma.php" method="POST" class="mt-4">
             <!-- Nome da Turma -->
@@ -183,6 +183,10 @@ if (isset($_POST['cadastrar'])) {
             });
         });
     </script>
+
+
+
+
 </body>
 
 </html>

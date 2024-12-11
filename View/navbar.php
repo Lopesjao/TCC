@@ -19,13 +19,21 @@ if (!isset($_SESSION)) {
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .navbar {
+            color: #fff !important;
+            width: auto;
+            height: 50%;
+        }
+        
+
         .custom-navbar {
             background-color: #2D55AD;
             color: white;
         }
-        .custom-nav-item{
+
+        .custom-nav-item {
             color: whitesmoke !important;
-background-color:beige !important;;
+            background-color: beige !important;
         }
     </style>
 </head>
@@ -66,7 +74,7 @@ background-color:beige !important;;
                         <?php
                     }
                     ?>
-                        <?php
+                    <?php
                     if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
                         //echo "é professor";
                         ?>

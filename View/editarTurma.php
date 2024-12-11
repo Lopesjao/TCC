@@ -56,13 +56,22 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Turmas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
+<style>
+    .btn {
+        align-items: center;
+        margin: auto 0;
+    }
+</style>
 
 <body>
     <?php require_once "navbar.php"; ?>
 
-    <div class="container mt-5">
+    <div class="container mt-5 min-vh-80">
         <h1 class="text-center">Editar Turmas</h1>
 
         <!-- Formulário de Pesquisa -->
@@ -118,7 +127,7 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
                         </td>
                         <td>
                             <?php
-                           // $alunoController = new AlunoController();
+                            // $alunoController = new AlunoController();
                             $alunos = $alunoController->getAlunosPorTurma22($turma['idTurma']);
                             if (empty($alunos)) {
                                 echo "Nenhum aluno encontrado";  // Mensagem de depuração
@@ -128,7 +137,7 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
                                     <div>
                                         <?php echo htmlspecialchars($aluno['nome']); ?>
                                         <form method="POST" class="d-inline">
-                                         
+
                                             <button type="submit" class="btn btn-sm btn-danger">Remover</button>
                                         </form>
                                     </div>
@@ -146,14 +155,15 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div class="container mt-5">
-        <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button>
-            <a class="btn btn-primary" href="verTurma.php" role="button">Visualizar Turmas</a>
-            <a class="btn btn-primary" href="editarTurma.php" role="button">Gerenciar Turmas</a>
-        </div>
-     
+
+   
+        <a class="btn btn-primary" href="CadastroTurma.php" role="button">Cadastro Turmas</a>
+        <a class="btn btn-primary" href="verTurma.php" role="button">Visualizar Turmas</a>
+        <a class="btn btn-primary" href="editarTurma.php" role="button">Gerenciar Turmas</a>
+
+
     </div>
- 
+
     <!-- Modal de Confirmação -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true">
