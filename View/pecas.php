@@ -52,7 +52,7 @@ if (!isset($_SESSION)) {
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="imagens/gabinete.png" alt="Gabinete" data-bs-toggle="modal"
+                        <img src="imagens/gabinete2.webp" alt="Gabinete" data-bs-toggle="modal"
                             data-bs-target="#modalGabinete">
                     </div>
                     <div class="card-content">
@@ -74,7 +74,7 @@ if (!isset($_SESSION)) {
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="imagens/processador.png" alt="Processador" data-bs-toggle="modal"
+                        <img src="imagens/processador3.webp" alt="Processador" data-bs-toggle="modal"
                             data-bs-target="#modalProcessador">
                     </div>
                     <div class="card-content">

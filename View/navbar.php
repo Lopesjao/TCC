@@ -28,12 +28,15 @@ if (!isset($_SESSION)) {
 
         .custom-navbar {
             background-color: #2D55AD;
-            color: white;
+            color: #fff !important;
         }
 
         .custom-nav-item {
-            color: whitesmoke !important;
+            color: #fff !important;
             background-color: beige !important;
+        }
+        .nav-link{
+            color: #fff !important;
         }
     </style>
 </head>

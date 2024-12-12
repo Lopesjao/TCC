@@ -36,12 +36,18 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="Style.css">
   <style>
+    * {
+      font-size: large;
+    }
+
     .carousel {
       position: relative;
       width: 80%;
-      max-width: 400px;
+      max-width: 500px;
       overflow: hidden;
       margin: 0 auto;
+      margin-top: 5%;
+      margin-bottom: 5%;
       border: 2px solid #ccc;
       border-radius: 10px;
     }
@@ -122,25 +128,6 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     }
 
 
-    .center-content {
-
-      /* Borda com uma cor mais clara */
-      border-radius: 10px;
-      /* Arredonda as bordas */
-      width: 10px;
-      height: auto;
-      text-align: center;
-      padding-top: 20vh;
-      margin: auto 0;
-      display: flex;
-      gap: 20px;
-
-      justify-content: center;
-
-      align-items: center;
-
-
-    }
 
     .carousel-item img {
       height: 400px;
@@ -158,10 +145,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
 
     }
 
-    .navbar {
-      background-color: rgba(0, 0, 0, 0.8);
 
-    }
 
     body {
 
@@ -186,23 +170,52 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     }
 
     #containerbt {
-      background-color: #2D55AD;
+      margin-top: 5%;
       
+      background-color: #2D55AD;
+
+      /* Cor de fundo do contêiner */
+      border: 2px solid #2D55AD;
+      /* Borda com uma cor mais clara */
+      border-radius: 20px;
+      /* Arredonda as bordas */
+      padding: 20px;
+      color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      margin-top: 10px;
+      max-width: auto;
+
+      margin-left: 10px;
+
+
+      text-align: center;
+
+    }
+
+    #bt2 {
+
+
+      display: flex;
+
+    }
+
+    #containerprincipal {
+      background-color: #2D55AD;
+margin-top: 20%;
       /* Cor de fundo do contêiner */
       border: 2px solid #2D55AD;
       /* Borda com uma cor mais clara */
       border-radius: 10px;
       /* Arredonda as bordas */
       padding: 20px;
-
+      color: #fff;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 
-      max-width: 600px;
+
 
       margin: 20px auto;
 
       text-align: center;
-
     }
 
     .btn-container {
@@ -218,15 +231,6 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
       text-align: center;
 
     }
-
-    #botoes p {
-      margin: 0;
-      /* Remove margens dos textos */
-      color: #fff;
-      /* Texto na cor branca */
-      font-weight: bold;
-      /* Deixa o texto em negrito */
-    }
   </style>
 </head>
 
@@ -239,38 +243,68 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
 
 
   <div class="container-fluid center-content">
-    <div>
+    <div id="containerprincipal">
       <h1>Bem vindo ao InfoQuest</h1>
       <p>Objeto de Aprendizagem para auxilio da Disciplina de Arquitetura de Organização de Computadores</p>
     </div>
-
-    <div class="carousel">
-      <div class="slides">
-        <a href="pecas.php"><img src="imagens/memoria.jpg" alt="Memória RAM"></a>
-        <a href="pecas.php"><img src="imagens/processador.png" alt="Processador"></a>
-        <a href="pecas.php"><img src="imagens/placamae.png" alt="Placa Mãe"></a>
-        <a href="pecas.php"><img src="imagens/HD2.png" alt="HD"></a>
+    <div id="containerbt">
+      <h5>Confira os principais Componentes do computador</h5>
+    </div>
+    <div >
+      <div class="carousel">
+        <div class="slides">
+          <a href="pecas.php"><img src="imagens/memoria.jpg" alt="Memória RAM"></a>
+          <a href="pecas.php"><img src="imagens/processador3.webp" alt="Processador"></a>
+          <a href="pecas.php"><img src="imagens/placamae.png" alt="Placa Mãe"></a>
+          <a href="pecas.php"><img src="imagens/HD2.png" alt="HD"></a>
+        </div>
+        <button class="btn-prev" onclick="prevSlide()">&#10094;</button>
+        <button class="btn-next" onclick="nextSlide()">&#10095;</button>
       </div>
-      <button class="btn-prev" onclick="prevSlide()">&#10094;</button>
-      <button class="btn-next" onclick="nextSlide()">&#10095;</button>
     </div>
 
-    <div id="containerbt">
-      <div id="botoes">
-        <div class="btn-container">
-          <div>
-            <p>Sou Aluno:</p>
-            <a class="btn btn-primary btn-lg btn-space" href="CadastroAluno.php" role="button">Login / Cadastro</a>
+    <div id="bt2">
+      <div id="containerbt">
+        <div id="botoes">
+          <div class="btn-container">
+            <div>
+              <p>Sou Aluno e desejo me cadastrar:</p>
+              <a class="btn btn-primary btn-lg btn-space" href="CadastroAluno.php" role="button">Cadastro</a>
+            </div>
+
           </div>
-          <div>
-            <p>Sou Professor:</p>
-            <a class="btn btn-secondary btn-lg btn-space" href="CadastroProfessor.php" role="button">Login /
-              Cadastro</a>
+        </div>
+      </div>
+
+      <div id="containerbt">
+        <div id="botoes">
+          <div class="btn-container">
+
+            <div>
+              <p>Sou Professor e desejo me cadastrar:</p>
+              <a class="btn btn-primary btn-lg btn-space" href="CadastroProfessor.php" role="button">
+                Cadastro</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div id="containerbt">
+        <div id="botoes">
+          <div class="btn-container">
+
+            <div>
+              <p>Acesse o fórum de discussão</p>
+              <a class="btn btn-primary btn-lg btn-space" href="VerErro.php" role="button">Fórum</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
