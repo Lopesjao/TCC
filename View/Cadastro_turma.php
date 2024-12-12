@@ -14,6 +14,29 @@ $alunoController = new AlunoController();
 $prof = new Professor(unserialize($_SESSION["professor"]));
 $alunos = $alunoController->getAlunos();  // Obtém todos os alunos do banco
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if (isset($_POST['cadastrar'])) {
     try {
         $turma = new Turma($_POST);

@@ -1,15 +1,11 @@
 <?php
-
 session_start();
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
 
-$aluno = new Aluno(unserialize(($_SESSION["aluno"])));
-
-
+$aluno = new Aluno(unserialize($_SESSION["aluno"]));
 $_SESSION['usuario_sessao'] = $aluno->getidAluno();
 
-echo $aluno;
 $aluno_id = $_SESSION['usuario_sessao'];
 $quiz_id = isset($_GET['quiz_id']) ? $_GET['quiz_id'] : null;
 
@@ -18,10 +14,9 @@ if ($quiz_id === null) {
     exit;
 }
 
-
 $pdo = new PDO("mysql:host=localhost;dbname=bdinfoquest;charset=utf8", "root", "");
 
-
+// Busca perguntas do quiz
 $stmt = $pdo->prepare("SELECT p.id, p.pergunta, p.alternativa_a, p.alternativa_b, p.alternativa_c, p.alternativa_d
                        FROM quiz p
                        JOIN quiz_perguntas qp ON p.id = qp.pergunta_id
@@ -30,46 +25,37 @@ $stmt->bindParam(':quiz_id', $quiz_id, PDO::PARAM_INT);
 $stmt->execute();
 $perguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$resultado = null; // Variável para armazenar o resultado
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $respostas = $_POST['respostas'];  // Respostas enviadas pelo aluno
     $corretas = 0;
-    
+
     foreach ($respostas as $pergunta_id => $resposta_aluno) {
         // Verifica a resposta correta
         $stmt = $pdo->prepare("SELECT correta FROM quiz WHERE id = :pergunta_id");
         $stmt->bindParam(':pergunta_id', $pergunta_id, PDO::PARAM_INT);
         $stmt->execute();
         $resposta_correta = $stmt->fetchColumn();
-        
+
         // Verifica se a resposta está correta
         if ($resposta_aluno === $resposta_correta) {
             $corretas++;
-            // Registra a resposta do aluno na tabela 'respostas'
-            $stmt = $pdo->prepare("INSERT INTO respostas (quiz_id, aluno_id, resposta) 
-                                   VALUES (:quiz_id, :aluno_id, :resposta)");
-            $stmt->bindParam(':quiz_id', $pergunta_id);
-            $stmt->bindParam(':aluno_id', $aluno_id);
-            $stmt->bindParam(':resposta', $resposta_aluno);
-            $stmt->execute();
-        } else {
-            // Registra a resposta errada do aluno
-            $stmt = $pdo->prepare("INSERT INTO respostas (quiz_id, aluno_id, resposta) 
-                                   VALUES (:quiz_id, :aluno_id, :resposta)");
-            $stmt->bindParam(':quiz_id', $pergunta_id);
-            $stmt->bindParam(':aluno_id', $aluno_id);
-            $stmt->bindParam(':resposta', $resposta_aluno);
-            $stmt->execute();
         }
+
+        // Registra a resposta do aluno na tabela 'respostas'
+        $stmt = $pdo->prepare("INSERT INTO respostas (quiz_id, aluno_id, resposta) 
+                               VALUES (:quiz_id, :aluno_id, :resposta)");
+        $stmt->bindParam(':quiz_id', $pergunta_id);
+        $stmt->bindParam(':aluno_id', $aluno_id);
+        $stmt->bindParam(':resposta', $resposta_aluno);
+        $stmt->execute();
     }
 
-    // Exibe a quantidade de questões acertadas diretamente na página
-    echo "<div class='container mt-5'>
-            <div class='alert alert-info'>
-                <h3>Você acertou $corretas de " . count($perguntas) . " questões!</h3>
-            </div>
-          </div>";
-    exit;
+    // Armazena o resultado na variável
+    $resultado = "<div class='alert alert-info mt-4'>
+                    <h3>Você acertou $corretas de " . count($perguntas) . " questões!</h3>
+                  </div>";
 }
 
 ?>
@@ -119,6 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             <button type="submit" class="btn btn-primary w-100">Enviar Respostas</button>
         </form>
+
+        <?php if ($resultado): ?>
+            <?php echo $resultado; ?>
+        <?php endif; ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

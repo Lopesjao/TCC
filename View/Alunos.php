@@ -15,10 +15,10 @@ if ($resultado) {
     $_SESSION['tipo'] = "prof";
     //  echo "prof entrou";
     //   echo $prof;
-    //   echo $_SESSION['usuario_sessao'];
-    // header('Location: Home.php');
-    //  exit();
+    //   echo $_SESSION['usuario_sessao'
+   
 }
+
 
 // Instanciar controle de alunos e turmas
 $alunoController = new AlunoController();
