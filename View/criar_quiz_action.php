@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Recupera os dados do formulário
     $quiz_nome = $_POST['quiz_nome'];
     $professor_id = $_SESSION['usuario_sessao'];
-    echo $professor_id;
+    //echo $professor_id;
     $perguntas = $_POST['perguntas']; // Perguntas selecionadas pelo professor
 
     // Insere o novo quiz

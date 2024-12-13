@@ -3,7 +3,10 @@
 session_start();
 include_once __DIR__ . '/../Model/Professor.php';
 include_once __DIR__ . '/../Control/ProfessorControle.php';
-
+if ( !isset($_SESSION["professor"])) {
+    header("Location: login.php");
+    exit;
+}
 $prof = new Professor(unserialize($_SESSION["professor"]));
 $_SESSION['usuario_sessao'] = $prof->getidProfessor();
 $_SESSION['tipo'] = "prof";
@@ -12,7 +15,7 @@ $_SESSION['tipo'] = "prof";
 
 $professorId = $_SESSION['usuario_sessao'];
 //echo ''. $professorId .'';
-// Conexão com o banco de dados
+// Conexão com o banco de dados gambiarra pq n utilizei a classe conexao aqui
 $host = 'localhost';
 $db = 'bdinfoquest';
 $user = 'root';
@@ -140,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
               
                     <button type="submit" class="btn btn-primary w-100">Criar questões</button>
-                    <a class="btn btn-primary w-100" href="exibir_quizzes.php"> Visualizar Quiz </a>
+                    <a class="btn btn-primary w-100" href="exibirquizprof.php"> Visualizar Quiz </a>
                     <a class="btn btn-primary w-100" href="visualizar_quiz.php"> Criar Quiz </a>
              
             </form>

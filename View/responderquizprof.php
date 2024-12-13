@@ -1,11 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION["aluno"]) && !isset($_SESSION["professor"])) {
-    header("Location: login.php");
-    exit;
-}
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
+
 
 $aluno = new Aluno(unserialize($_SESSION["aluno"]));
 $_SESSION['usuario_sessao'] = $aluno->getidAluno();
@@ -15,7 +12,7 @@ $quiz_id = isset($_GET['quiz_id']) ? $_GET['quiz_id'] : null;
 
 if ($quiz_id === null) {
     echo "Quiz não encontrado!";
-    exit;
+   // exit;
 }
 
 $pdo = new PDO("mysql:host=localhost;dbname=bdinfoquest;charset=utf8", "root", "");
@@ -71,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responder Quiz</title>
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 </head>
 
@@ -109,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endforeach; ?>
             
             <button type="submit" class="btn btn-primary w-100">Enviar Respostas</button>
-        </form>
+        </form> 
 
         <?php if ($resultado): ?>
             <?php echo $resultado; ?>

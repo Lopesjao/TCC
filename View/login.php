@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Página de Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <link rel="stylesheet" href="Style.css">
+   
 </head>
 
 <body>
@@ -105,10 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </a>
             </div>
            
-                <!-- Logo no centro -->
-
-
-                <!-- Botões de Login/Cadastro -->
+               
                 <p>Sou Aluno:</p>
                 <a class="btn btn-primary btn-lg btn-space" href="CadastroAluno.php" role="button">Cadastro</a>
 

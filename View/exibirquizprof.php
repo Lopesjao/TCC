@@ -6,6 +6,9 @@ if (!isset($_SESSION["aluno"]) && !isset($_SESSION["professor"])) {
     exit;
 }
 include_once __DIR__ . '/../Model/Aluno.php';
+include_once __DIR__ . '/../Model/Professor.php';
+
+include_once __DIR__ . '/../Control/ProfessorControle.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
 // Conexão com o banco de dados
 $pdo = new PDO("mysql:host=localhost;dbname=bdinfoquest;charset=utf8", "root", "");
@@ -13,8 +16,10 @@ $pdo = new PDO("mysql:host=localhost;dbname=bdinfoquest;charset=utf8", "root", "
 // Recupera todos os quizzes disponíveis para os alunos
 $stmt = $pdo->prepare("SELECT * FROM quizzes");
 $stmt->execute();
-$aluno = new Aluno(unserialize($_SESSION["aluno"]));
-$_SESSION['usuario_sessao'] = $aluno->getNome();
+//$aluno = new Aluno(unserialize($_SESSION["aluno"]));
+//$_SESSION['usuario_sessao'] = $aluno->getNome();
+$professor = new Professor(unserialize($_SESSION['professor']));
+$_SESSION['usuario_sessao'] = $professor->getNome();
 
 $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -40,7 +45,7 @@ $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php require_once "navbar.php"; ?>
 
     <div class="container justify-content-center align-items-center">
-        <h2 class="text-center mb-4">Quizzes Disponíveis para a sua turma  <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?></h2>
+        <h2 class="text-center mb-4">Quizzes Criados por  <?php echo htmlspecialchars($_SESSION['usuario_sessao']); ?></h2>
 
         <?php if (count($quizzes) > 0): ?>
             <div class="list-group">

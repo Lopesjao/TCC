@@ -8,33 +8,14 @@ include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Conexao/ConexaoConfig.php';
 include_once __DIR__ . '/../Model/Professor.php';
 include_once __DIR__ . '/../Control/ProfessorControle.php';
-
+if (!isset($_SESSION["aluno"]) && !isset($_SESSION["professor"])) {
+    header("Location: login.php");
+    exit;
+}
 $turmaController = new TurmaController();
 $alunoController = new AlunoController();
 $prof = new Professor(unserialize($_SESSION["professor"]));
 $alunos = $alunoController->getAlunos();  // Obtém todos os alunos do banco
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if (isset($_POST['cadastrar'])) {

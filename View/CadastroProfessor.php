@@ -13,7 +13,7 @@ require_once('Config.php');
 if (isset($_POST['cadastrar'])) {
     $professor = new Professor($_POST);
     $professor->setDataNasc(date("Y-m-d H:i:s", strtotime($_POST['datanasc'])));
-    var_dump($_POST);
+    //var_dump($_POST);
     $ProfessorController = new ProfessorController();
     $resultado = $ProfessorController->insertProf($professor);
 

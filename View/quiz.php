@@ -1,4 +1,5 @@
 <?php
+//PRIMEIRVA VERSAO QUIZ NAO ESTA SENDO UTILIZADA
 if (!isset($_SESSION)) {
     session_start();
 }

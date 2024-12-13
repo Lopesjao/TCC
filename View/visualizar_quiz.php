@@ -3,14 +3,20 @@
 session_start();
 include_once __DIR__ . '/../Model/Professor.php';
 include_once __DIR__ . '/../Control/ProfessorControle.php';
+include_once __DIR__ . '/../Model/Turma.php';
+include_once __DIR__ . '/../Control/TurmaControle.php';
 
 $prof = new Professor(unserialize($_SESSION["professor"]));
+$turmaController = new TurmaController();
 $_SESSION['usuario_sessao'] = $prof->getidProfessor();
-$_SESSION['tipo'] = "prof";
-
-
-
 $professorId = $_SESSION['usuario_sessao'];
+$turmas = $turmaController->getTurmasDoProfessor($professorId);
+$_SESSION['tipo'] = "prof";
+$turmaSelecionada = isset($_GET['turma']) ? $_GET['turma'] : null;
+
+
+
+
 //echo $professorId;
 
 
@@ -52,6 +58,18 @@ $professorId = $_SESSION['usuario_sessao'];
                     <label for="quiz_nome" class="form-label">Nome do Quiz:</label>
                     <input type="text" id="quiz_nome" name="quiz_nome" class="form-control" required>
                 </div>
+                <div class="mb-3">
+                    
+                    <select name="turma" class="form-select" required>
+                    <option value="">Selecione uma turma</option>
+                    <?php foreach ($turmas as $turma): ?>
+                        <option value="<?php echo $turma['idTurma']; ?>" <?php echo $turma['idTurma'] == $turmaSelecionada ? 'selected' : ''; ?>>
+                            <?php echo $turma['nome']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                </div>
+
 
                 <h4>Selecione as Perguntas para o Quiz:</h4>
 

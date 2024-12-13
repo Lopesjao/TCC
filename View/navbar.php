@@ -23,6 +23,7 @@ if (!isset($_SESSION)) {
             color: #fff !important;
             width: auto;
             height: 50%;
+            
         }
         
 

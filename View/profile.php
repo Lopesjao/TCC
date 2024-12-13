@@ -1,5 +1,5 @@
 <?php
-// Initialize the session - is required to check the login state.
+// api google
 session_start();
 // Check if the user is logged in, if not then redirect to login page
 if (!isset($_SESSION['google_loggedin'])) {

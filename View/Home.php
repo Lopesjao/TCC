@@ -34,7 +34,7 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
   <title>Página Inicial</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="Style.css">
+  
   <style>
     * {
       font-size: large;
@@ -172,10 +172,10 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     #containerbt {
       margin-top: 5%;
       
-      background-color: #2D55AD;
+      background-color: rgb(93, 119, 175);
 
       /* Cor de fundo do contêiner */
-      border: 2px solid #2D55AD;
+      border: 2px solidrgb(78, 115, 196);
       /* Borda com uma cor mais clara */
       border-radius: 20px;
       /* Arredonda as bordas */
@@ -183,10 +183,14 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
       color: #fff;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
       margin-top: 10px;
-      max-width: auto;
-
+      max-width: 250px;
+      height: 150x;
+display: ;
       margin-left: 10px;
 
+      margin: 20px auto;
+
+      text-align: center;
 
       text-align: center;
 
@@ -200,10 +204,10 @@ if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
     }
 
     #containerprincipal {
-      background-color: #2D55AD;
+      background-color:rgb(93, 119, 175);
 margin-top: 20%;
       /* Cor de fundo do contêiner */
-      border: 2px solid #2D55AD;
+      border: 2px solidrgb(78, 115, 196);
       /* Borda com uma cor mais clara */
       border-radius: 10px;
       /* Arredonda as bordas */
@@ -247,7 +251,7 @@ margin-top: 20%;
       <h1>Bem vindo ao InfoQuest</h1>
       <p>Objeto de Aprendizagem para auxilio da Disciplina de Arquitetura de Organização de Computadores</p>
     </div>
-    <div id="containerbt">
+    <div id="containerprincipal">
       <h5>Confira os principais Componentes do computador</h5>
     </div>
     <div >

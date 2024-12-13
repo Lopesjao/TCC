@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION["aluno"]) && !isset($_SESSION["professor"])) {
+    header("Location: login.php");
+    exit;
+}
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
 include_once __DIR__ . '/../Control/TurmaControle.php';
@@ -125,26 +129,51 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <?php
-                            // $alunoController = new AlunoController();
-                            $alunos = $alunoController->getAlunosPorTurma22($turma['idTurma']);
-                            if (empty($alunos)) {
-                                echo "Nenhum aluno encontrado";  // Mensagem de depuração
-                            } else {
-                                foreach ($alunos as $aluno):
-                                    ?>
-                                    <div>
-                                        <?php echo htmlspecialchars($aluno['nome']); ?>
-                                        <form method="POST" class="d-inline">
 
-                                            <button type="submit" class="btn btn-sm btn-danger">Remover</button>
-                                        </form>
+
+                        <td>
+                            <!-- Botão para abrir o modal de alunos -->
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#verAlunosModal<?php echo $turma['idTurma']; ?>">
+                                Ver Alunos
+                            </button>
+
+                            <!-- Modal para listar os alunos -->
+                            <div class="modal fade" id="verAlunosModal<?php echo $turma['idTurma']; ?>" tabindex="-1"
+                                aria-labelledby="verAlunosLabel<?php echo $turma['idTurma']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="verAlunosLabel<?php echo $turma['idTurma']; ?>">
+                                                Alunos da Turma: <?php echo htmlspecialchars($turma['nome']); ?></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php
+                                            $alunos = $alunoController->getAlunosPorTurma22($turma['idTurma']);
+                                            if (empty($alunos)) {
+                                                echo "<p>Nenhum aluno encontrado.</p>";
+                                            } else {
+                                                echo "<ul class='list-group'>";
+                                                foreach ($alunos as $aluno) {
+                                                    echo "<li class='list-group-item'>" . htmlspecialchars($aluno['nome']) . "</li>";
+                                                }
+                                                echo "</ul>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Fechar</button>
+                                        </div>
                                     </div>
-                                <?php endforeach;
-                            }
-                            ?>
+                                </div>
+                            </div>
                         </td>
+
+
+
                         <td>
                             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
                                 onclick="setTurmaId(<?php echo $turma['idTurma']; ?>)">
@@ -156,7 +185,7 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
             </tbody>
         </table>
 
-   
+
         <a class="btn btn-primary" href="CadastroTurma.php" role="button">Cadastro Turmas</a>
         <a class="btn btn-primary" href="verTurma.php" role="button">Visualizar Turmas</a>
         <a class="btn btn-primary" href="editarTurma.php" role="button">Gerenciar Turmas</a>
@@ -195,6 +224,6 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
             document.getElementById('idTurma').value = id;
         }
     </script>
-</body>
+     <footer> <?php require_once "footer.php"; ?></footer>
 
 </html>

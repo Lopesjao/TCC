@@ -1,4 +1,5 @@
 <?php
+//ESTA PAGINA NAO ESTA SENDO UTILIZADA
 session_start();
 include_once __DIR__ . '/../Model/Aluno.php';
 include_once __DIR__ . '/../Control/AlunoControle.php';
