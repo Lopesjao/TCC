@@ -27,6 +27,7 @@ if (isset($_POST['cadastrar'])) {
         if ($resultado) {
             echo "<div class='alert alert-success'>Aluno cadastrado com sucesso!</div>";
            // $alunoController->consultarPorNome($resultado);
+           header("Location: login.php");
         } else {
             echo "<div class='alert alert-danger'>Erro ao cadastrar aluno!</div>";
         }
@@ -117,7 +118,7 @@ if (isset($_POST['cadastrar'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <footer> <?php require_once "footer.php"; ?></footer>
+  
 </body>
 
 </html>

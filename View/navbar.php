@@ -61,10 +61,27 @@ if (!isset($_SESSION)) {
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="CadastrarEroo.php">Manutenção</a>
-                    </li>
+                <?php
+                    if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "prof") {
+                        //echo "é professor";
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="VerErro.php">Manutenção</a>
+                        </li>
+                        <?php
+                    }
+                    ?> 
+                    <?php
+                    if (isset($_SESSION['tipo']) && ($_SESSION['tipo']) == "aluno") {
+                        //echo "é professor";
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="CadastrarEroo.php">Manutenção</a>
+                        </li>
+                        <?php
+                    }
+                    ?>
+            
                     <li class="nav-item">
                         <a class="nav-link" href="pecas.php">Peças</a>
                     </li>

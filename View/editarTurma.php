@@ -224,6 +224,6 @@ if (isset($_POST['novoNome']) && isset($_POST['idTurma'])) {
             document.getElementById('idTurma').value = id;
         }
     </script>
-     <footer> <?php require_once "footer.php"; ?></footer>
+ 
 
 </html>
