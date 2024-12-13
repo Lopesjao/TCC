@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/12/2024 às 07:55
+-- Tempo de geração: 13/12/2024 às 09:15
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -52,14 +52,14 @@ INSERT INTO `aluno` (`idAluno`, `nome`, `email`, `matricula`, `dataNasc`, `senha
 (9, 'testemat', 'teste@gmail.com', NULL, '2024-10-04', '123'),
 (10, 'aaa', 'aaa@gmail.com', '123', '2024-09-04', 'aa'),
 (11, 'joao teste', 'joaoteste@gmail.com', '12345678', '1970-01-01', '123456'),
-(12, 'joao teste 23', 'joao23@gmail.com', '1234567', '2004-03-25', '12345'),
+(12, 'joao lopes', 'joao23@gmail.com', '1234567', '2004-03-25', '12345'),
 (13, 'joao teste 24', 'joao24@gmail.com', '12345', '2004-03-25', '$2y$10$6NlpLvyZrGtWa'),
 (14, 'joao teste 24', 'joao24@gmail.com', '12345', '2004-03-25', '$2y$10$w7JyAYZM/bNOI'),
 (15, 'joao teste 24', 'joao24@gmail.com', '12345', '2004-03-25', '$2y$10$CtxgBKiCjEbQu'),
-(16, 'joao teste 23', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
-(17, 'joao teste 23', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
-(18, 'joao teste 23', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
-(19, 'joao teste 23', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
+(16, 'joao lopes', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
+(17, 'joao lopes', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
+(18, 'joao lopes', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
+(19, 'joao lopes', 'joao23@gmail.com', '1234567', '2004-03-25', '123456'),
 (20, 'rafael gamemaker2', 'rafael.2023001254@aluno.iffar.edu.br', '1234567', '1111-12-12', '123'),
 (21, 'rafael gamemaker2', 'rafael.2023001254@aluno.iffar.edu.br', '1234567', '1111-12-12', '123'),
 (22, 'rafael gamemaker2', 'rafael.2023001254@aluno.iffar.edu.br', '1234567', '1111-12-12', '123'),
@@ -69,7 +69,9 @@ INSERT INTO `aluno` (`idAluno`, `nome`, `email`, `matricula`, `dataNasc`, `senha
 (26, 'teste 5', 'teste5@gmail.com', '1212', '1212-12-12', '12345'),
 (27, 'teste 5', 'teste5@gmail.com', '1212', '1212-12-12', '12345'),
 (28, 'joao aluno', 'jaluno@gmail.com', '1212', '2000-10-10', '12345'),
-(29, 'joao aluno', 'jaluno@gmail.com', '1212', '2000-10-10', '12345');
+(29, 'joao aluno', 'jaluno@gmail.com', '1212', '2000-10-10', '12345'),
+(30, 'alunoteste', 'aaa@gmail.com', '12', '1010-10-10', '111'),
+(31, 'alunoteste', 'aaa@gmail.com', '12', '1010-10-10', '111');
 
 -- --------------------------------------------------------
 
@@ -99,14 +101,17 @@ INSERT INTO `aluno_turma` (`idAluno`, `idTurma`) VALUES
 (5, 107),
 (5, 108),
 (5, 110),
+(5, 113),
 (10, 1),
 (11, 1),
+(11, 113),
 (15, 1),
 (16, 1),
 (16, 109),
 (18, 1),
 (18, 108),
 (19, 112),
+(19, 114),
 (21, 1);
 
 -- --------------------------------------------------------
@@ -179,11 +184,11 @@ CREATE TABLE `quiz` (
 --
 
 INSERT INTO `quiz` (`id`, `pergunta`, `alternativa_a`, `alternativa_b`, `alternativa_c`, `alternativa_d`, `correta`, `professor_id`) VALUES
-(1, 'aaa', 'a', 'a', 'a', 'a', 'B', NULL),
-(2, 'aaa', 'a', 'a', 'a', 'a', 'B', 4),
-(3, 'teste', 'aaa', 'aa', 'a', 'a', 'B', 4),
-(4, 'qual a funçao do mouse', 'arrastar', 'teclar', 'digitar', 'nao sei mais', 'A', 4),
-(5, 'estou louco', 'sim', 'sim 2', 'claro', 'sim com certeza', 'A', 4);
+(1, 'Qual a função do processador?', 'Ele marca a hora do pc', 'Ele executa as instruções e processa os dados necessários para o funcionamento dos programas.', 'Ele é usado para ver videos', 'ele controla o teclado e o mouse', 'B', NULL),
+(2, 'teste de perguntas', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'B', 4),
+(3, 'teste de pergunta', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'B', 4),
+(4, 'teste de perguntas', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'A', 4),
+(5, 'teste de perguntas', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'teste de alternativa', 'A', 4);
 
 -- --------------------------------------------------------
 
@@ -205,7 +210,9 @@ INSERT INTO `quizzes` (`id`, `nome_quiz`, `professor_id`) VALUES
 (1, 'Quiz 1', 4),
 (2, 'Quiz 3', 4),
 (3, 'Quiz 4', 4),
-(4, 'quiz teste', 4);
+(4, 'quiz teste', 4),
+(5, 'quiz ads 18', 4),
+(6, 'teste', 4);
 
 -- --------------------------------------------------------
 
@@ -233,7 +240,12 @@ INSERT INTO `quiz_perguntas` (`quiz_id`, `pergunta_id`) VALUES
 (3, 4),
 (3, 5),
 (4, 3),
-(4, 4);
+(4, 4),
+(5, 2),
+(5, 3),
+(5, 4),
+(6, 3),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -277,7 +289,30 @@ INSERT INTO `respostas` (`id`, `quiz_id`, `aluno_id`, `resposta`) VALUES
 (22, 3, 12, 'B'),
 (23, 4, 12, 'A'),
 (24, 3, 12, 'C'),
-(25, 4, 12, 'A');
+(25, 4, 12, 'A'),
+(26, 3, 12, 'C'),
+(27, 4, 12, 'A'),
+(28, 3, 12, 'C'),
+(29, 4, 12, 'A'),
+(30, 3, 12, 'A'),
+(31, 4, 12, 'A'),
+(32, 3, 12, 'B'),
+(33, 4, 12, 'B'),
+(34, 3, 12, 'B'),
+(35, 4, 12, 'B'),
+(36, 3, 12, 'B'),
+(37, 4, 12, 'B'),
+(38, 3, 12, 'A'),
+(39, 4, 12, 'A'),
+(40, 3, 12, 'C'),
+(41, 4, 12, 'B'),
+(42, 3, 12, 'B'),
+(43, 4, 12, 'B'),
+(44, 3, 12, 'D'),
+(45, 4, 12, 'B'),
+(46, 3, 12, 'B'),
+(47, 4, 12, 'C'),
+(48, 2, 12, 'A');
 
 -- --------------------------------------------------------
 
@@ -299,7 +334,8 @@ CREATE TABLE `resposta_erro` (
 
 INSERT INTO `resposta_erro` (`idRespostaErro`, `idErro`, `resposta`, `idUsuario`, `tipoUsuario`) VALUES
 (1, 1, 'afafaf', 0, 'aluno'),
-(2, 2, 'aaaaaaa', 12, 'aluno');
+(2, 2, 'aaaaaaa', 12, 'aluno'),
+(3, 1, 'aaaaaaa', 4, 'professor');
 
 -- --------------------------------------------------------
 
@@ -328,10 +364,8 @@ INSERT INTO `turma` (`idTurma`, `nome`, `idProfessor`) VALUES
 (31, '', 1),
 (32, 'rafael gamemaker', 1),
 (50, 'turma 4', 4),
-(51, 'turma prof alecson', 4),
+(51, 'turma prof joao', 4),
 (53, 'turma ads 18', 4),
-(54, '', 4),
-(56, '', 4),
 (57, 'turma prof joao7', 5),
 (58, 'turma agora', 5),
 (59, 'aaaaaaaa', 5),
@@ -386,8 +420,10 @@ INSERT INTO `turma` (`idTurma`, `nome`, `idProfessor`) VALUES
 (108, 'turma lala', 5),
 (109, 'turma sexo', 5),
 (110, 'ads 28', 5),
-(111, 'turma dus da manha', 4),
-(112, 'oita bem', 4);
+(111, 'turma 6', 4),
+(112, 'turma 5', 4),
+(113, 'turma 2 prof joao', 4),
+(114, 'turma 20', 4);
 
 --
 -- Índices para tabelas despejadas
@@ -470,7 +506,7 @@ ALTER TABLE `turma`
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idAluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de tabela `erros`
@@ -494,25 +530,25 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT de tabela `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `respostas`
 --
 ALTER TABLE `respostas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de tabela `resposta_erro`
 --
 ALTER TABLE `resposta_erro`
-  MODIFY `idRespostaErro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idRespostaErro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `turma`
 --
 ALTER TABLE `turma`
-  MODIFY `idTurma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `idTurma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- Restrições para tabelas despejadas
@@ -573,4 +609,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
- 
